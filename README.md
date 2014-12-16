@@ -1,6 +1,22 @@
 math-editor
 ============
 
+[DEMO](http://scaljeri.github.io/math-editor)
+
+https://www.polymer-project.org/docs/start/reusableelements.html
+Build new gh-pages: "../tools/bin/gp.sh <username> test-element"
+
+Bookmarks:
+   * [MathQuill](http://mathquill.com/)
+   * [MathJax](http://www.mathjax.org/)
+   * [Community filters](https://github.com/addyosmani/polymer-filters)
+   
+   Build: ../tools/bin/gp.sh scaljeri math-editor
+   
+   
+e.target.templateInstance.model.s;
+
+
 See the [component page](http://polymerlabs.github.io/math-editor) for more information.
 
 ## Getting Started

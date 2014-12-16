@@ -8,15 +8,75 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS
 -->
 <html>
+
 <head>
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <script src="../webcomponentsjs/webcomponents.min.js"></script>
-  <link rel="import" href="../core-component-page/core-component-page.html">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <script src="../webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="../core-component-page/core-component-page.html">
 
 </head>
+
 <body unresolved>
 
-  <core-component-page></core-component-page>
+    <polymer-element name="greeting-tag">
+        <!-- outermost template defines the element's shadow DOM -->
+        <template>
+            <ul>
+                <template repeat="{{s in salutations}}">
+                    <li>{{s.what}}:
+                        <input type="text" value="{{s.who}}">
+                    </li>
+                </template>
+            </ul>
+        </template>
+        <script>
+            Polymer('greeting-tag', {
+                ready: function () {
+                    // populate the element’s data model
+                    // (the salutations array)
+                    this.salutations = [
+                        {
+                            what: 'Hello',
+                            who: 'World'
+                        },
+                        {
+                            what: 'GoodBye',
+                            who: 'DOM APIs'
+                        },
+                        {
+                            what: 'Hello',
+                            who: 'Declarative'
+                        },
+                        {
+                            what: 'GoodBye',
+                            who: 'Imperative'
+                        }
+                    ];
+
+                    window.x = this.salutations;
+
+                    var observer = new ArrayObserver(this.salutations);
+                    observer.open(function (splices) {
+                        // respond to changes to the elements of arr.
+                        debugger;
+                        splices.forEach(function (splice) {
+                            debugger;
+                            /*
+                            splice.index; // index position that the change occurred.
+                            splice.removed; // an array of values representing the sequence of elements which were removed
+                            splice.addedCount; // the number of elements which were inserted.
+                            */
+                        });
+                    });
+                },
+            });
+        </script>
+    </polymer-element>
+
+
+    <greeting-tag></greeting-tag>
+
 
 </body>
+
 </html>
