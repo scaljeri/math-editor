@@ -4,6 +4,7 @@ math-editor
 [DEMO](http://scaljeri.github.io/math-editor)
 
 https://www.polymer-project.org/docs/start/reusableelements.html
+
 Build new gh-pages: "../tools/bin/gp.sh <username> test-element"
 
 Bookmarks:
@@ -13,7 +14,12 @@ Bookmarks:
    
    Build: ../tools/bin/gp.sh scaljeri math-editor
    
-   
+ 
+ Install paper elements:
+ 
+     $> bower install Polymer/paper-elements
+     <link rel="import" href="components/paper-elements/paper-elements.html">
+     
 e.target.templateInstance.model.s;
 
 

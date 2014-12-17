@@ -1,0 +1,22 @@
+<polymer-element name="demo-app">
+    <template>
+        <section>
+            <paper-input id="formula-input" label="Formula" value="{{formula}}" floatingLabel></paper-input>
+
+            <p>
+                <p>Detected format: {{format}}</p>
+
+                <math-editor format="{{format}}" formula="{{formula}}"></math-editor>
+                <!--<math-editor formula={{formula}}></math-editor>-->
+            </p>
+        </section>
+
+        <link rel="stylesheet" href="/math-editor/demo-app.css">
+    </template>
+
+    <script>
+        Polymer('demo-app', {
+
+        });
+    </script>
+</polymer-element>
