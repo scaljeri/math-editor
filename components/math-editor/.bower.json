@@ -1,0 +1,40 @@
+{
+  "name": "math-editor",
+  "authors": [
+    "Lucas Calje <lucas@calje.eu>"
+  ],
+  "description": "Element providing solution to no problem in particular.",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "seed"
+  ],
+  "main": "math-editor.html",
+  "license": "MIT",
+  "homepage": "https://github.com/scaljeri/math-editor/",
+  "ignore": [
+    "/.*",
+    "/tests/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.1",
+    "MathJax": "~2.4.0",
+    "asciimathml": "git@github.com:mathjax/asciimathml#master",
+    "core-elements": "Polymer/core-elements#~0.5.1"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^2.0.0-rc1",
+    "paper-elements": "Polymer/paper-elements#~0.5.2"
+  },
+  "_release": "d356ced443",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "d356ced4437354da23a7d1d2ddbd2e4805b543a3"
+  },
+  "_source": "git://github.com/scaljeri/math-editor.git",
+  "_target": "master",
+  "_originalSource": "scaljeri/math-editor",
+  "_direct": true
+}

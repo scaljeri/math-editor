@@ -1,0 +1,13 @@
+{
+  "name": "asciimathml",
+  "homepage": "https://github.com/mathjax/asciimathml",
+  "_release": "791f733cec",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "791f733cecba54889c58d5dcf19101b91a94aa31"
+  },
+  "_source": "git@github.com:mathjax/asciimathml.git",
+  "_target": "master",
+  "_originalSource": "git@github.com:mathjax/asciimathml"
+}

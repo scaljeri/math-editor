@@ -1,0 +1,7 @@
+{
+  "name": "math-editor#gh-pages",
+  "private": true,
+  "dependencies": {
+    "math-editor": "scaljeri/math-editor#master"
+  }
+}
