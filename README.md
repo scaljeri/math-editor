@@ -11,6 +11,7 @@ Bookmarks:
    * [MathQuill](http://mathquill.com/)
    * [MathJax](http://www.mathjax.org/)
    * [Community filters](https://github.com/addyosmani/polymer-filters)
+   * [Latex editor](http://www.codecogs.com/latex/eqneditor.php)
    
    Build: ../tools/bin/gp.sh scaljeri math-editor
    

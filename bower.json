@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^2.0.0-rc1",
-    "paper-elements": "Polymer/paper-elements#~0.5.2"
+    "paper-elements": "Polymer/paper-elements#~0.5.2",
+    "normalize.css": "git://github.com/necolas/normalize.css.git#master"
   }
 }
