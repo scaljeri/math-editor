@@ -41,12 +41,10 @@ module.exports = function (gulp, $) {
         });
     });
 
-    gulp.task('watch', ['bootstrap', 'css', 'connect'], function () {
+    gulp.task('watch', ['copy', 'connect'], function () {
         gulp.watch([
             'index.html',
-            'js/**/*.js',
-            'images/**/*',
-            'target/css/main.css'
+            'resources/elements/**/*.html'
         ], function (event) {
             $.util.log('Reloading', $.util.colors.blue(path.relative('.', event.path)));
             lr.changed({
@@ -57,7 +55,7 @@ module.exports = function (gulp, $) {
         });
 
         gulp.watch([
-            'scss/**/*.scss'
+            'resurces/elements/**/*.scss'
         ], ['css']);
     });
 };

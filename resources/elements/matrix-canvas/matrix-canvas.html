@@ -1,24 +1,25 @@
 <!-- http://jsfiddle.net/t6q06761/9/ -->
-<polymer-element name="math-canvas" attributes="animate">
+<polymer-element name="matrix-canvas" attributes="animate width height">
     <template>
         <link rel="stylesheet" href="math-canvas.css">
-        <canvas id="matrix">Sorry Browser Won't Support</canvas>
+        <canvas id="matrix" width="{{width}}" height="{{height}}">Sorry Browser Won't Support</canvas>
     </template>
 
     <script>
-        var chars = '1234567890½¼¾⅓⅔µ£€«»₊₋₌₍₎«µ·¸¹º»¼½¾πρςστυφχψωϏϐϕϖϗῳ⅀⅐⅑⅒⅓⅔⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞⅟∏∐∑−∓∔∕∖∗∘∙√∛∜∝∞∟∠∫∬∭∮∯∰∱∲∽∾∿≀≁≂≃⌠⌡⍴⍵⍶⍷⍸⍹⍺0123456789-+xy',
-            fps = 60;
+        var chars = '1234567890½¼¾⅓⅔µ£€«»₊₋₌₍₎«µ·¸¹º»¼½¾πρ    ςστυφχψωϏϐϕϖϗῳ⅀⅐⅑⅒⅓⅔⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞⅟∏∐∑−∓∔∕∖∗∘∙√∛∜∝∞∟∠∫∬∭∮∯∰∱∲∽∾∿≀≁≂≃⌠⌡⍴⍵⍶⍷⍸⍹⍺0123456789-+xy',
+            fps = 30;
 
-        function draw(context, yPosition) {
-            context.fillStyle = 'rgba(0,0,0,.05)';
-            context.fillRect(0, 0, width, height);
-            context.fillStyle = '#0F0';
-            context.font = '10pt Georgia';
+        function draw(ctx, yPositions, width, height) {
+
+            ctx.fillStyle = 'rgba(0,0,0,.05)';
+            ctx.fillRect(0, 0, width, height);
+            ctx.fillStyle = '#0F0';
+
             yPositions.map(function (y, index) {
                 text = chars[parseInt(Math.random() * chars.length)];
                 x = (index * 10) + 10;
 
-                q.getContext('2d').fillText(text, x, y);
+                ctx.fillText(text, x, y);
                 if (y > 100 + Math.random() * 1e4) {
                     yPositions[index] = 0;
                 } else {
@@ -27,66 +28,67 @@
             });
         }
 
-        function runMatrix() { // this === math-canvas
+        function runMatrix() {
+            var current = Date.now();
 
+            if (current - this.lastTime > this.refreshRate) {
+                draw(this.ctx, this.yPositions, this.width, this.height);
+                this.lastTime = current;
+            }
+
+            if (this.animate || this.animate === undefined) {
+                requestAnimationFrame(this.runMatrix);
+            }
         }
 
-        (function () {
-                function draw() {
-                    var x, ctx = this.ctx;
+        /*
+        function draw() {
+            var x, ctx = this.ctx;
 
-                    yPositions.map(function (y, index) {
-                        text = chars[parseInt(Math.random() * chars.length)];
-                        x = (index * 10) + 10;
+            yPositions.map(function (y, index) {
+                text = chars[parseInt(Math.random() * chars.length)];
+                x = (index * 10) + 10;
 
-                        ctx.fillText(text, x, y);
-                        if (y > 100 + Math.random() * 1e4) {
-                            yPositions[index] = 0;
-                        } else {
-                            yPositions[index] = y + 10;
-                        }
-                    });
-                };
-
-                function RunMatrix() {
-                    var current = Date.now();
-
-                    if (current - lastTime > this.refreshRate) {
-                        draw(this.ctx, this.yPositions);
-                        this.lastTime = current;
-                    }
-
-                    if (this.animate || this.animate === undefined) {
-                        requestAnimationFrame(this.runMatrix);
-                    }
+                ctx.fillText(text, x, y);
+                if (y > 100 + Math.random() * 1e4) {
+                    yPositions[index] = 0;
+                } else {
+                    yPositions[index] = y + 10;
                 }
+            });
+        };*/
 
-                Polymer('math-editor', {
-                        created: function () {
-                            this.yPosition = Array(300).join(0).split('');
-                        },
-                        ready: function () {
-                            var s = window.screen;
-                            var width = q.width = s.width;
-                            var height = q.height;
+        Polymer('matrix-canvas', {
+            created: function () {
+                this.yPositions = Array(300).join(0).split('');
+            },
+            ready: function () {
+                if (!this.width) {
+                    this.width = this.$.matrix.parentNode.offsetWidth || window.innerWidth;
+                }
+                if (!this.height) {
+                    this.height = this.$.matrix.parentNode.offsetHeight || window.innerHeight;
+                }
+                console.log(this.width);
 
-                            this.ctx = this.$.matrix.getContext('2d');
-                            this.ctx.fillStyle = 'rgba(0,0,0,.05)';
-                            this.ctx.fillRect(0, 0, width, height);
-                            this.ctx.fillStyle = '#0F0';
-                            this.ctx.font = '10pt Georgia';
+                // initial setup
+                this.ctx = this.$.matrix.getContext('2d');
+                this.ctx.fillStyle = 'rgb(0,0,0.5)';
+                this.ctx.fillRect(0, 0, this.width, this.height);
+                this.ctx.font = '10pt Georgia';
 
-                            this.refreshRate = 1000 / fps;
-                            this.runMatrix = runMatrix.bind(this);
-                        },
-                        animateChanged: function (newV) {
-                            if (newV === true) {
-                                this.runMatrix();
-                            }
-                        }
-                    }
-                });
-        })();
+                this.refreshRate = 1000 / fps;
+                this.runMatrix = runMatrix.bind(this); // setup loop function with context
+
+                this.lastTime = 0;
+                this.runMatrix();
+            },
+            animateChanged: function (newV) {
+                if (newV === true) {
+                    this.runMatrix();
+                }
+            }
+        });
     </script>
 </polymer-element>
 

@@ -4,6 +4,8 @@ var gulp = require('gulp'),
     requireDir = require('require-dir'),
     $ = require('gulp-load-plugins')();
 
+global.elements = [ 'demo-app'];
+
 // Load application tasks
 (function () {
     'use strict';
@@ -15,7 +17,7 @@ var gulp = require('gulp'),
 }());
 
 gulp.task('serve', ['clean'], function () {
-    gulp.start('copy', 'open');
+    gulp.start('copy', 'css', 'open');
 });
 
 gulp.task('default', ['clean'], function () {

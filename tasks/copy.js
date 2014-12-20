@@ -7,10 +7,10 @@ module.exports = function (gulp, $) {
         gulp.src('index.html')
             .pipe(gulp.dest(target));
 
-        gulp.src('bower_components/normalize.css/normalize.css')
-            .pipe(gulp.dest(target + 'css/'));
+        gulp.src('resources/elements/demo-app/*')
+            .pipe(gulp.dest(target + 'custom-elements/demo-app/'));
 
-        gulp.src('resources/elements/*')
-            .pipe(gulp.dest(target + 'polymer-elements/'));
+        gulp.src('resources/elements/matrix-canvas/*')
+            .pipe(gulp.dest(target + 'custom-elements/matrix-canvas/'));
     });
 };

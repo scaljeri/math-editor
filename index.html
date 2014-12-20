@@ -11,32 +11,30 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
 
-    <link rel="stylesheet" type="text/css" href="/demo/css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="/math-editor/mathquill/build/mathquill.css">
-    <link rel="stylesheet" type="text/css" href="/demo/css/demo.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/normalize.css/normalize.css">
+    <!--<link rel="stylesheet" type="text/css" href="-editor/mathquill/build/mathquill.css">-->
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
     <!--<script src="katex.js"></script>-->
-    <script src="/math-editor/mathquill/build/mathquill.min.js"></script>
+    <!--<script src="/math-editor/mathquill/build/mathquill.min.js"></script>-->
     <!-- https://github.com/mathjax/asciimathml -->
-    <script src="demo/node_modules/asciimathml/asciimath-based/ASCIIMathTeXImg.js"></script>
+    <script src="bower_components/asciimathml/asciimath-based/ASCIIMathTeXImg.js"></script>
 
-    <script src="demo/node_modules//webcomponentsjs/webcomponents.min.js"></script>
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
 
     <!-- css mathMl polyfill -->
     <!--<script src="http://fred-wang.github.io/mathml.css/mspace.js"></script>-->
 
-    <link rel="import" href="demo/node_modules/core-ajax/core-ajax.html">
-    <link rel="import" href="demo/node_modules/paper-elements/paper-elements.html">
-    <link rel="import" href="resources/elements/math-editor/math-editor.html">
+    <link rel="import" href="bower_components/core-ajax/core-ajax.html">
+    <link rel="import" href="bower_components/paper-elements/paper-elements.html">
+    <link rel="import" href="custom-elements/matrix-canvas/matrix-canvas.html">
     <!-- child element before parent! -->
-    <link rel="import" href="resources/elements/demo-app/demo-app.html">
+    <link rel="import" href="custom-elements/demo-app/demo-app.html">
 </head>
 
 <body unresolved>
-    <matrix-canvas responsive></matrix-canvas>
-
     <demo-app></demo-app>
 </body>
 
