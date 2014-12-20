@@ -9,5 +9,8 @@ module.exports = function (gulp, $) {
 
         gulp.src('bower_components/normalize.css/normalize.css')
             .pipe(gulp.dest(target + 'css/'));
+
+        gulp.src('resources/elements/*')
+            .pipe(gulp.dest(target + 'polymer-elements/'));
     });
 };

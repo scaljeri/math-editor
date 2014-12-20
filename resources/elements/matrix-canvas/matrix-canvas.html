@@ -1,46 +1,92 @@
 <!-- http://jsfiddle.net/t6q06761/9/ -->
+<polymer-element name="math-canvas" attributes="animate">
+    <template>
+        <link rel="stylesheet" href="math-canvas.css">
+        <canvas id="matrix">Sorry Browser Won't Support</canvas>
+    </template>
 
-<canvas id="q" width="500" height="500">Sorry Browser Won't Support</canvas
+    <script>
+        var chars = '1234567890½¼¾⅓⅔µ£€«»₊₋₌₍₎«µ·¸¹º»¼½¾πρςστυφχψωϏϐϕϖϗῳ⅀⅐⅑⅒⅓⅔⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞⅟∏∐∑−∓∔∕∖∗∘∙√∛∜∝∞∟∠∫∬∭∮∯∰∱∲∽∾∿≀≁≂≃⌠⌡⍴⍵⍶⍷⍸⍹⍺0123456789-+xy',
+            fps = 60;
 
-        $(document).ready(function(){
-        var s=window.screen;
-        var width = q.width=s.width;
-        var height = q.height;
-        var yPositions = Array(300).join(0).split('');
-        var ctx=q.getContext('2d');
+        function draw(context, yPosition) {
+            context.fillStyle = 'rgba(0,0,0,.05)';
+            context.fillRect(0, 0, width, height);
+            context.fillStyle = '#0F0';
+            context.font = '10pt Georgia';
+            yPositions.map(function (y, index) {
+                text = chars[parseInt(Math.random() * chars.length)];
+                x = (index * 10) + 10;
 
-        var draw = function () {
-        ctx.fillStyle='rgba(0,0,0,.05)';
-        ctx.fillRect(0,0,width,height);
-        ctx.fillStyle='#0F0';
-        ctx.font = '10pt Georgia';
-        yPositions.map(function(y, index){
-        text = String.fromCharCode(1e2+Math.random()*33);
-        x = (index * 10)+10;
-        q.getContext('2d').fillText(text, x, y);
-        if(y > 100 + Math.random()*1e4)
-        {
-        yPositions[index]=0;
+                q.getContext('2d').fillText(text, x, y);
+                if (y > 100 + Math.random() * 1e4) {
+                    yPositions[index] = 0;
+                } else {
+                    yPositions[index] = y + 10;
+                }
+            });
         }
-        else
-        {
-        yPositions[index] = y + 10;
-        }
-        });
-        };
-        RunMatrix();
-        function RunMatrix()
-        {
-        if(typeof Game_Interval != "undefined") clearInterval(Game_Interval);
-        Game_Interval = setInterval(draw, 33);
-        }
-        function StopMatrix()
-        {
-        clearInterval(Game_Interval);
-        }
-        //setInterval(draw, 33);
-        $("button#pause").click(function(){
-        StopMatrix();});
-        $("button#play").click(function(){RunMatrix();});
 
-        })
+        function runMatrix() { // this === math-canvas
+
+        }
+
+        (function () {
+                function draw() {
+                    var x, ctx = this.ctx;
+
+                    yPositions.map(function (y, index) {
+                        text = chars[parseInt(Math.random() * chars.length)];
+                        x = (index * 10) + 10;
+
+                        ctx.fillText(text, x, y);
+                        if (y > 100 + Math.random() * 1e4) {
+                            yPositions[index] = 0;
+                        } else {
+                            yPositions[index] = y + 10;
+                        }
+                    });
+                };
+
+                function RunMatrix() {
+                    var current = Date.now();
+
+                    if (current - lastTime > this.refreshRate) {
+                        draw(this.ctx, this.yPositions);
+                        this.lastTime = current;
+                    }
+
+                    if (this.animate || this.animate === undefined) {
+                        requestAnimationFrame(this.runMatrix);
+                    }
+                }
+
+                Polymer('math-editor', {
+                        created: function () {
+                            this.yPosition = Array(300).join(0).split('');
+                        },
+                        ready: function () {
+                            var s = window.screen;
+                            var width = q.width = s.width;
+                            var height = q.height;
+
+                            this.ctx = this.$.matrix.getContext('2d');
+                            this.ctx.fillStyle = 'rgba(0,0,0,.05)';
+                            this.ctx.fillRect(0, 0, width, height);
+                            this.ctx.fillStyle = '#0F0';
+                            this.ctx.font = '10pt Georgia';
+
+                            this.refreshRate = 1000 / fps;
+                            this.runMatrix = runMatrix.bind(this);
+                        },
+                        animateChanged: function (newV) {
+                            if (newV === true) {
+                                this.runMatrix();
+                            }
+                        }
+                    }
+                });
+        })();
+    </script>
+</polymer-element>
+
