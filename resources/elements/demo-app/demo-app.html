@@ -1,17 +1,25 @@
 <polymer-element name="demo-app">
     <template>
+        <matrix-canvas id="bg-matrix"></matrix-canvas>
         <main>
             <link rel="stylesheet" href="demo-app.css">
-            <matrix-canvas id="background-visual" responsive></matrix-canvas>
 
-            <div class="glass"></div>
+            <header id="top-header">
+                <glitch-effect>Polymer Foruma element</glitch-effect>
+                <matrix-canvas id="bg-matrix-blurred" width="{{matrixCloneWidth}}" height="{{matrixCloneHeight}}" clone></matrix-canvas>
+            </header>
         </main>
 
     </template>
 
     <script>
         Polymer('demo-app', {
+            ready: function () {
+                this.matrixCloneHeight = this.$['top-header'].offsetHeight + 20;
+                this.matrixCloneWidth  = this.$['top-header'].offsetWidth + 20;
 
+                this.$['top-header'].classList.add('visible');
+            }
         });
     </script>
 </polymer-element>

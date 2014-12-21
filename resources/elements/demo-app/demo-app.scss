@@ -1,8 +1,15 @@
+* {
+    box-sizing: border-box;
+}
 main {
     margin: 20px;
 }
 
-#background-visual {
+matrix-canvas {
+    display: block;
+}
+
+#bg-matrix {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -10,7 +17,8 @@ main {
     right: 0;
     z-index: -1;
 }
-.glass {
+#top-header {
+    overflow: hidden;
     position: relative;
     z-index: 1;
     width: 100%;
@@ -21,16 +29,23 @@ main {
     background-color: rgba(0, 39, 94, 0.25);
     border: 1px solid rgba(0,0,0,0.5);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 10px rgba(255, 255, 255, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.25), inset 0 -15px 30px rgba(0, 0, 0, 0.3);
+    transition: opacity 1s ease-in-out;
+    opacity: 0;
 
-    &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: rgba(0,0,0,.5);
-        filter: blur(3px);
+    &.visible {
+        opacity: 1;
+        transition-delay: 2s;
     }
+}
+
+
+
+
+#bg-matrix-blurred {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: 0;
+    bottom: 0;
+    filter: blur(3px);
 }

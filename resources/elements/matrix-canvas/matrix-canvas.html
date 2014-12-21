@@ -1,5 +1,5 @@
 <!-- http://jsfiddle.net/t6q06761/9/ -->
-<polymer-element name="matrix-canvas" attributes="animate width height">
+<polymer-element name="matrix-canvas" attributes="animate width height clone">
     <template>
         <link rel="stylesheet" href="math-canvas.css">
         <canvas id="matrix" width="{{width}}" height="{{height}}">Sorry Browser Won't Support</canvas>
@@ -7,81 +7,69 @@
 
     <script>
         var chars = '1234567890½¼¾⅓⅔µ£€«»₊₋₌₍₎«µ·¸¹º»¼½¾πρ    ςστυφχψωϏϐϕϖϗῳ⅀⅐⅑⅒⅓⅔⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞⅟∏∐∑−∓∔∕∖∗∘∙√∛∜∝∞∟∠∫∬∭∮∯∰∱∲∽∾∿≀≁≂≃⌠⌡⍴⍵⍶⍷⍸⍹⍺0123456789-+xy',
-            fps = 30;
+            refreshRate = 1000 / 30,
+            lastTime = 0,
+            yPositions = Array(300).join(0).split(''),
+            children = [], // clones
+            parent, parentCtx, parentWidth, parentHeight; // parent canvas element
 
-        function draw(ctx, yPositions, width, height) {
-
-            ctx.fillStyle = 'rgba(0,0,0,.05)';
-            ctx.fillRect(0, 0, width, height);
-            ctx.fillStyle = '#0F0';
+        function draw() {
+            parentCtx.fillStyle = 'rgba(0,0,0,.05)';
+            parentCtx.fillRect(0, 0, parentWidth, parentHeight);
+            parentCtx.fillStyle = '#0F0';
 
             yPositions.map(function (y, index) {
                 text = chars[parseInt(Math.random() * chars.length)];
                 x = (index * 10) + 10;
 
-                ctx.fillText(text, x, y);
+                parentCtx.fillText(text, x, y);
                 if (y > 100 + Math.random() * 1e4) {
                     yPositions[index] = 0;
                 } else {
                     yPositions[index] = y + 10;
                 }
+            });
+
+            children.forEach(function (child) {
+                child.drawImage(parent, 0, 0);
             });
         }
 
         function runMatrix() {
             var current = Date.now();
-
-            if (current - this.lastTime > this.refreshRate) {
-                draw(this.ctx, this.yPositions, this.width, this.height);
-                this.lastTime = current;
+            if (current - lastTime > refreshRate) {
+                draw();
+                lastTime = current;
             }
 
+            /*
             if (this.animate || this.animate === undefined) {
                 requestAnimationFrame(this.runMatrix);
             }
+            */
+            requestAnimationFrame(this.runMatrix);
         }
 
-        /*
-        function draw() {
-            var x, ctx = this.ctx;
-
-            yPositions.map(function (y, index) {
-                text = chars[parseInt(Math.random() * chars.length)];
-                x = (index * 10) + 10;
-
-                ctx.fillText(text, x, y);
-                if (y > 100 + Math.random() * 1e4) {
-                    yPositions[index] = 0;
-                } else {
-                    yPositions[index] = y + 10;
-                }
-            });
-        };*/
-
         Polymer('matrix-canvas', {
-            created: function () {
-                this.yPositions = Array(300).join(0).split('');
-            },
             ready: function () {
-                if (!this.width) {
-                    this.width = this.$.matrix.parentNode.offsetWidth || window.innerWidth;
+                if (this.clone === undefined) {
+                    parent = this.$.matrix;
+
+                    parentWidth =  this.width  || this.$.matrix.parentNode.offsetWidth || window.innerWidth;
+                    parentHeight = this.height || this.$.matrix.parentNode.offsetHeight || window.innerHeight;
+                    this.width = parentWidth;
+                    this.height = parentHeight;
+
+                    // initial setup
+                    parentCtx = parent.getContext('2d');
+                    parentCtx.fillStyle = 'rgb(0,0,0.5)';
+                    parentCtx.fillRect(0, 0, parentWidth, parentHeight);
+                    parentCtx.font = '10pt Georgia';
+
+                    runMatrix();
+                } else {
+                   children.push(this.$.matrix.getContext('2d'));
                 }
-                if (!this.height) {
-                    this.height = this.$.matrix.parentNode.offsetHeight || window.innerHeight;
-                }
-                console.log(this.width);
-
-                // initial setup
-                this.ctx = this.$.matrix.getContext('2d');
-                this.ctx.fillStyle = 'rgb(0,0,0.5)';
-                this.ctx.fillRect(0, 0, this.width, this.height);
-                this.ctx.font = '10pt Georgia';
-
-                this.refreshRate = 1000 / fps;
-                this.runMatrix = runMatrix.bind(this); // setup loop function with context
-
-                this.lastTime = 0;
-                this.runMatrix();
             },
             animateChanged: function (newV) {
                 if (newV === true) {

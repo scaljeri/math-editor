@@ -1,13 +1,13 @@
 /* global require: true */
 var es = require('event-stream'),
-    print = require('gulp-print');
+    print = require('gulp-print'),
+    rename = require('gulp-rename');
 
 module.exports = function (gulp, $) {
     'use strict';
 
     gulp.task('css', function () {
-        var cssFilter = $.filter(['*.css']),
-            target = 'demo/custom-elements/';
+        var cssFilter = $.filter(['*.css']);
 
         var processors = [
             require('autoprefixer-core')({
@@ -21,7 +21,7 @@ module.exports = function (gulp, $) {
 
         global.elements.forEach(function (element) {
             taskList.push(
-                gulp.src('resources/elements/' + element + '/' + element + '.scss')
+                gulp.src(element.input)
                 .pipe(print())
                 .pipe($.sourcemaps.init())
                 .pipe($.sass({
@@ -40,7 +40,7 @@ module.exports = function (gulp, $) {
                 .pipe($.size({
                     showFiles: true
                 }))
-                .pipe(gulp.dest(target + element + '/'))
+                .pipe(gulp.dest(element.output))
             );
 
             return es.merge.apply(es, taskList);
