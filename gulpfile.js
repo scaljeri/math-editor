@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     $ = require('gulp-load-plugins')();
 
 global.elements = [
-    //{input: 'resources/scss/demo.scss', output: 'demo/css/'},
+    {input: 'resources/scss/demo.scss', output: 'demo/css/'},
     {input: 'resources/elements/demo-app/demo-app.scss', output: 'demo/custom-elements/demo-app/'}
 ];
 

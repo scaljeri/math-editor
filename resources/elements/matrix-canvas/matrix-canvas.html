@@ -31,7 +31,10 @@
             });
 
             children.forEach(function (child) {
-                child.drawImage(parent, 0, 0);
+               child.width  = parent.width;
+               child.height = parent.height;
+
+               child.getContext('2d').drawImage(parent, 0, 0);
             });
         }
 
@@ -68,12 +71,12 @@
 
                     runMatrix();
                 } else {
-                   children.push(this.$.matrix.getContext('2d'));
+                   children.push(this.$.matrix);//.getContext('2d'));
                 }
             },
             animateChanged: function (newV) {
                 if (newV === true) {
-                    this.runMatrix();
+                    //this.runMatrix();
                 }
             }
         });

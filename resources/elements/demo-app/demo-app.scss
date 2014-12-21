@@ -2,11 +2,16 @@
     box-sizing: border-box;
 }
 main {
-    margin: 20px;
+    padding: 20px;
+    overflow: hidden;
+    height: 100%;
 }
 
 matrix-canvas {
     display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
 
 #bg-matrix {
@@ -35,6 +40,10 @@ matrix-canvas {
     &.visible {
         opacity: 1;
         transition-delay: 2s;
+    }
+
+    matrix-canvas {
+        overflow: visible;
     }
 }
 

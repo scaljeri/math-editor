@@ -6,7 +6,7 @@
 
             <header id="top-header">
                 <glitch-effect>Polymer Foruma element</glitch-effect>
-                <matrix-canvas id="bg-matrix-blurred" width="{{matrixCloneWidth}}" height="{{matrixCloneHeight}}" clone></matrix-canvas>
+                <matrix-canvas id="bg-matrix-blurred" clone></matrix-canvas>
             </header>
         </main>
 
@@ -15,10 +15,10 @@
     <script>
         Polymer('demo-app', {
             ready: function () {
-                this.matrixCloneHeight = this.$['top-header'].offsetHeight + 20;
-                this.matrixCloneWidth  = this.$['top-header'].offsetWidth + 20;
+                setTimeout( function () {
+                    this.$['top-header'].classList.add('visible');
+                }.bind(this), 0);
 
-                this.$['top-header'].classList.add('visible');
             }
         });
     </script>
