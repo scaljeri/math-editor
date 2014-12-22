@@ -11,7 +11,8 @@ module.exports = function (gulp, $) {
         watch = require('gulp-watch'),
         livereload = require('gulp-livereload'),
         rename = require("gulp-rename"),
-        path = require('path');
+        path = require('path'),
+        concat = require('gulp-concat');
 
     gulp.task('webserver', function () {
         connect.server({
@@ -37,7 +38,8 @@ module.exports = function (gulp, $) {
 
     gulp.task('watch', function () {
         livereload.listen();
-        gulp.watch('resources/**/*.scss', ['css']);
+        gulp.watch('resources/elements/**/*.scss', ['css']);
+        gulp.watch('resources/scss/demo.scss', ['main-css']);
 
         gulp.watch([
                 'index.html',
@@ -54,16 +56,17 @@ module.exports = function (gulp, $) {
         gulp.watch('demo/custom-elements/**/*.css', function (event) {
             console.log("CHANGED FILE IS " + event.path);
             console.log(' ...path only=' + path.dirname(event.path));
-            /*
+
             gulp.src(event.path)
-                .pipe(gulp.rename(*/
+                .pipe(concat('dummy.html'))
+                .pipe(gulp.dest(path.dirname(event.path)));
         });
 
         gulp.src(['demo/index.html', 'demo/custom-elements/**/*'])
             .pipe(watch(['demo/index.html', 'demo/custom-elements/**/*']))
-            .pipe(debug({
+            /*.pipe(debug({
                 verbose: false
-            }))
+            }))*/
             .pipe(livereload());
         //.pipe(connect.reload());
 
