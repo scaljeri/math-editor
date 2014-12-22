@@ -19,16 +19,8 @@ global.elements = [
     });
 }());
 
-gulp.task('default', ['copy', 'css', 'webserver', /*'livereload',*/ 'watch']);
+gulp.task('default', ['copy', 'css', 'webserver', 'watch']);
 
-gulp.task('old-serve', ['clean'], function () {
-    gulp.start('copy', 'css', 'old-open');
-});
-
-gulp.task('xdefault', ['clean'], function () {
-    gulp.start('css');
-});
-
-gulp.task('old-open', ['old-watch'], function () {
-    //require('open')('http://localhost:3000/demo/index.html');
+gulp.task('open', ['watch'], function () {
+    require('open')('http://localhost:8080/demo/index.html');
 });
