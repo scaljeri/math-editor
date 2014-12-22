@@ -1,7 +1,8 @@
 /* global require: true */
 var es = require('event-stream'),
     print = require('gulp-print'),
-    rename = require('gulp-rename');
+    rename = require('gulp-rename'),
+    livereload = require('gulp-livereload');
 
 module.exports = function (gulp, $) {
     'use strict';
@@ -13,7 +14,8 @@ module.exports = function (gulp, $) {
             taskList.push(processSCSS(element));
         });
 
-        return es.merge.apply(es, taskList);
+        return es.merge.apply(es, taskList)
+                .pipe(livereload());
     });
 
     function processSCSS(element) {
@@ -28,24 +30,26 @@ module.exports = function (gulp, $) {
             ];
 
         return gulp.src(element.input)
+        /*
             .pipe(print())
             .pipe($.sourcemaps.init())
+            */
             .pipe($.sass({
                 errLogToConsole: true
-            }))
+            })) /*
             .pipe($.sourcemaps.write({
                 includeContent: false
             }))
             .pipe($.sourcemaps.init({
                 loadMaps: true
-            }))
-            .pipe($.postcss(processors))
+            }))*/
+            .pipe($.postcss(processors))/*
             .pipe($.sourcemaps.write('.'))
             .pipe(cssFilter)
             .pipe(cssFilter.restore())
             .pipe($.size({
                 showFiles: true
-            }))
+            })) */
             .pipe(gulp.dest(element.output))
     }
 };

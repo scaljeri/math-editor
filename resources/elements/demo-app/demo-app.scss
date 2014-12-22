@@ -1,8 +1,10 @@
+$offset: 10px;
+
 * {
     box-sizing: border-box;
 }
 main {
-    padding: 20px;
+    padding: $offset;
     overflow: hidden;
     height: 100%;
 }
@@ -47,13 +49,10 @@ matrix-canvas {
     }
 }
 
-
-
-
 #bg-matrix-blurred {
     position: absolute;
-    top: -20px;
-    left: -20px;
+    top: -$offset;
+    left: -$offset;
     right: 0;
     bottom: 0;
     filter: blur(3px);
