@@ -18,5 +18,10 @@ module.exports = function (gulp, $) {
 
         gulp.src('resources/fonts/*')
             .pipe(gulp.dest(target + 'css/fonts/'));
+
+        // images
+        gulp.src('resources/images/*')
+            .pipe(gulp.dest(target + 'images/'));
+
     });
 };
