@@ -31,10 +31,10 @@
             });
 
             children.forEach(function (child) {
-               child.width  = parent.width;
-               child.height = parent.height;
+                child.width = parent.width;
+                child.height = parent.height;
 
-               child.getContext('2d').drawImage(parent, 0, 0);
+                child.getContext('2d').drawImage(parent, 0, 0);
             });
         }
 
@@ -44,35 +44,37 @@
                 draw();
                 lastTime = current;
             }
-
-            /*
-            if (this.animate || this.animate === undefined) {
-                requestAnimationFrame(this.runMatrix);
-            }
-            */
             requestAnimationFrame(this.runMatrix);
+        }
+
+        function initializeParentCanvas(self) {
+            parentCtx = parent.getContext('2d');
+            parentWidth = self.width = self.$.matrix.parentNode.offsetWidth || window.innerWidth;
+            parentHeight = self.height = self.$.matrix.parentNode.offsetHeight || window.innerHeight;
+            parentCtx.fillStyle = 'rgb(0,0,0.5)';
+            parentCtx.fillRect(0, 0, parentWidth, parentHeight)
+            parentCtx.font = '10pt Georgia';
         }
 
         Polymer('matrix-canvas', {
             ready: function () {
+                var id;
                 if (this.clone === undefined) {
                     parent = this.$.matrix;
 
-                    parentWidth =  this.width  || this.$.matrix.parentNode.offsetWidth || window.innerWidth;
-                    parentHeight = this.height || this.$.matrix.parentNode.offsetHeight || window.innerHeight;
-                    this.width = parentWidth;
-                    this.height = parentHeight;
+                    parentWidth = this.width = this.$.matrix.parentNode.offsetWidth || window.innerWidth;
+                    parentHeight = this.height = this.$.matrix.parentNode.offsetHeight || window.innerHeight;
+                    initializeParentCanvas(this);
 
-                    // initial setup
-                    parentCtx = parent.getContext('2d');
-                    parentCtx.fillStyle = 'rgb(0,0,0.5)';
-                    parentCtx.fillRect(0, 0, parentWidth, parentHeight);
-                    parentCtx.font = '10pt Georgia';
+                    window.addEventListener('resize', function () {
+                        initializeParentCanvas(this);
+                    }.bind(this));
 
                     runMatrix();
                 } else {
-                   children.push(this.$.matrix);//.getContext('2d'));
+                    children.push(this.$.matrix);
                 }
+
             },
             animateChanged: function (newV) {
                 if (newV === true) {
