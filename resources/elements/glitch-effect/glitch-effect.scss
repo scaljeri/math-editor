@@ -1,0 +1,25 @@
+#parent {
+    position: relative;
+}
+.content {
+    color: #fff;
+    font-size: 18px;
+    font-family: Vitamin, Arail;
+    display: block;
+}
+.partial {
+    display: block;
+    height: 2px;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.partial-content {
+    height: 2px;
+    display: block;
+    left: 0;
+    right: 0;
+    position: absolute;
+    user-select: none;
+}

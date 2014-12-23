@@ -6,6 +6,7 @@ var gulp = require('gulp'),
 
 global.elements = [
     {input: 'resources/scss/demo.scss', output: 'demo/css/'},
+    {input: 'resources/elements/glitch-effect/glitch-effect.scss', output: 'demo/custom-elements/glitch-effect/'},
     {input: 'resources/elements/demo-app/demo-app.scss', output: 'demo/custom-elements/demo-app/'}
 ];
 

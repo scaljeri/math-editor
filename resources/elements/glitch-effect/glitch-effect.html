@@ -1,0 +1,64 @@
+<polymer-element name="glitch-effect" attributes="text fontSize">
+    <template>
+        <link rel="stylesheet" href="glitch-effect.css">
+        <span id="parent">
+ <!--
+        <template repeat="{{x, i in glitch}}">
+            <span style="transform: translate({{x}}, {{i}}px);">{{text}}</span>
+    </template>
+    -->
+
+    <span id="parent">
+        <template if="{{original}}">
+            <span id="original-content" class="content" style="font-size: {{fontSize}}px">{{text}}</span>
+    </template>
+
+    <template if="{{!original}}" repeat="{{x, i in glitch}}">
+        <span class="content partial" style="transform: translate({{x}}px, {{2*i}}px);width:{{width}}px; font-size: {{fontSize}}px">
+                <span class="partial-content" style="transform: translate(0px, -{{2*i}}px);width:{{width -10}}px;font-size:{{fontSize}}px">{{text}}</span>
+        </span>
+    </template>
+    </span>
+
+    </span>
+    </template>
+
+    <script>
+        Polymer('glitch-effect', {
+            text: '',
+            original: true,
+            fontSize: 28,
+            ready: function () {
+                var self = this;
+
+                this.glitch = [];
+                this.addEventListener('mouseover', function () {
+                    self.original = false;
+                });
+                this.addEventListener('mouseleave', function () {
+                    self.original = true;
+                    calculateGlitch(this);
+                });
+            },
+            domReady: function () {
+                this.width = this.$['original-content'].offsetWidth;
+                this.height = this.$['original-content'].offsetHeight;
+                this.slices = parseInt(this.height / 2) + 1;
+
+                calculateGlitch(this);
+            },
+            detached: function () {},
+            attached: function () {}
+        });
+
+        function calculateGlitch(self) {
+            self.glitch.length = 0;
+
+            for (var i = 0; i < self.slices; i++) {
+                self.glitch.push(3 * (-.5 + Math.random()));
+            }
+
+        }
+    </script>
+</polymer-element>
+

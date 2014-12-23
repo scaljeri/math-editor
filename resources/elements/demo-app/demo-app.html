@@ -3,10 +3,12 @@
         <link rel="stylesheet" href="demo-app.css">
 
         <matrix-canvas id="bg-matrix"></matrix-canvas>
-        <main>
-            <header id="top-header">
-                <!--<glitch-effect>Polymer Foruma element</glitch-effect>-->
+        <main style="background-color: grey">
+            <header id="top-header" class="glass">
                 <matrix-canvas id="bg-matrix-blurred" clone></matrix-canvas>
+                <div class="header-content">
+                    <glitch-effect text="A Polymer Formula Element"></glitch-effect>
+                </div>
             </header>
         </main>
 
@@ -15,7 +17,8 @@
     <script>
         Polymer('demo-app', {
             ready: function () {
-                setTimeout( function () {
+                //this.$['top-header'].classList.add('visible');
+                setTimeout(function () {
                     this.$['top-header'].classList.add('visible');
                 }.bind(this), 0);
 

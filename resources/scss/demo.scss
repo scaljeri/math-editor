@@ -1,8 +1,17 @@
 @import 'normalize';
 
+@font-face {
+    font-family: Vitamin ;
+    src: url('/css/fonts/VITAMIN.TTF');
+}
+
 html, body, main {
     margin: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
+
+    .test {
+         font-family: Vitamin;
+    }
 }

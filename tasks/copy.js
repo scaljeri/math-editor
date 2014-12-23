@@ -12,5 +12,11 @@ module.exports = function (gulp, $) {
 
         gulp.src('resources/elements/matrix-canvas/*')
             .pipe(gulp.dest(target + 'custom-elements/matrix-canvas/'));
+
+        gulp.src('resources/elements/glitch-effect/*')
+            .pipe(gulp.dest(target + 'custom-elements/glitch-effect/'));
+
+        gulp.src('resources/fonts/*')
+            .pipe(gulp.dest(target + 'css/fonts/'));
     });
 };
