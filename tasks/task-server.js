@@ -30,11 +30,12 @@ module.exports = function (gulp, $) {
             ], ['copy']);
 
         // Create dummy html file to fore livereload to reload the page
-        gulp.watch('demo/custom-elements/**/*.css', function (event) {
+        /*
+        gulp.watch('demo/custom-elements/** /*.css', function (event) {
             gulp.src(event.path)
                 .pipe(concat('dummy.html'))
                 .pipe(gulp.dest(path.dirname(event.path)));
-        });
+        });*/
 
         gulp.src(['demo/index.html', 'demo/custom-elements/**/*'])
             .pipe(watch(['demo/index.html', 'demo/custom-elements/**/*']))

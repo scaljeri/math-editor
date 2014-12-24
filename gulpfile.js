@@ -15,7 +15,9 @@ global.elements = [
     var dir = requireDir('./tasks');
 
     Object.keys(dir).forEach(function (key) {
-        dir[key](gulp, $);
+        if (key.match(/^task-/)) {
+            dir[key](gulp, $);
+        }
     });
 }());
 
