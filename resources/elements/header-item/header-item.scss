@@ -1,0 +1,6 @@
+@import '../../scss/mixins';
+
+#logo, img {
+    @include size(100%, 100%);
+}
+

@@ -1,6 +1,8 @@
 /* global require: true */
-var print = require('gulp-print'),
-    gulpif = require('gulp-if');
+var gulpif = require('gulp-if'),
+    fs = require('fs'),
+    path = require('path'),
+    print = require('gulp-print');
 
 module.exports = function (gulp, $) {
     'use strict';
@@ -35,6 +37,12 @@ module.exports = function (gulp, $) {
                     showFiles: true
                 }))
                 .pipe(gulp.dest(outputDir))
+        },
+        getFolders: function (dir) {
+            return fs.readdirSync(dir)
+                .filter(function (file) {
+                    return fs.statSync(path.join(dir, file)).isDirectory();
+                });
         }
     };
 };

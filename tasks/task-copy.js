@@ -1,27 +1,23 @@
 module.exports = function (gulp, $) {
     'use strict';
 
+    var getFolders = require('./utils')(gulp, $).getFolders;
+
     gulp.task('copy', function () {
-        var target = 'demo/';
-
         gulp.src('index.html')
-            .pipe(gulp.dest(target));
-
-        gulp.src('resources/elements/demo-app/*')
-            .pipe(gulp.dest(target + 'custom-elements/demo-app/'));
-
-        gulp.src('resources/elements/matrix-canvas/*')
-            .pipe(gulp.dest(target + 'custom-elements/matrix-canvas/'));
-
-        gulp.src('resources/elements/glitch-effect/*')
-            .pipe(gulp.dest(target + 'custom-elements/glitch-effect/'));
+            .pipe(gulp.dest('demo/'));
 
         gulp.src('resources/fonts/*')
-            .pipe(gulp.dest(target + 'css/fonts/'));
+            .pipe(gulp.dest('demo/css/fonts/'));
 
         // images
         gulp.src('resources/images/*')
-            .pipe(gulp.dest(target + 'images/'));
+            .pipe(gulp.dest('demo/images/'));
+
+        getFolders('resources/elements/').map(function (element) {
+            gulp.src('resources/elements/' + element + '/' + element + '.html')
+                .pipe(gulp.dest('demo/custom-elements/' + element));
+        });
 
     });
 };

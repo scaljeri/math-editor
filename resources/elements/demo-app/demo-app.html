@@ -6,9 +6,15 @@
         <main style="background-color: grey">
             <header id="top-header" class="glass">
                 <matrix-canvas id="bg-matrix-blurred" clone></matrix-canvas>
-                <div class="header-content">
+                <section class="header-content">
                     <glitch-effect text="A Polymer Formula Element"></glitch-effect>
-                </div>
+
+                    <div id="header-items" on-change="{{handleItemChange}}">
+                         <header-item logo="/images/input-icon.png" item-name="input" selected="{{item}}"></header-item>
+                         <header-item logo="/images/latex-icon.png" item-name="latex" selected="{{item}}"></header-item>
+                         <header-item logo="/images/edit-math-icon.png" item-name="edit" selected="{{item}}"></header-item>
+                    </div>
+                </section>
             </header>
         </main>
 
@@ -22,6 +28,9 @@
                     this.$['top-header'].classList.add('visible');
                 }.bind(this), 0);
 
+            },
+            handleItemChange: function (item) {
+                debugger;
             }
         });
     </script>

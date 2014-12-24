@@ -1,0 +1,24 @@
+@mixin breakpoint($points...) {
+    @each $point in $points {
+        @if $point == small {
+            // Landscape phones and down
+            @media (max-width: 480px) { @content; }
+        }
+        @else if $point == medium {
+            // Landscape phone to portait tablet
+            @media (min-width: 480px) and (max-width: 767px) { @content; }
+        }
+        @else if $point == large {
+            // Portrait tablet to landscape and desktop
+            @media (min-width: 768px) and (max-width: 1023px) { @content; }
+        }
+        @else if $point == xlarge {
+            // Large desktop
+            @media (min-width: 1023px) { @content; }
+        }
+        @else if $point == xxlarge {
+            // Extra large desktop
+            @media (min-width: 1400px) { @content; }
+        }
+    }
+}

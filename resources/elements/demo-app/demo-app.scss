@@ -1,10 +1,14 @@
-$offset:10px;
+@import '../../scss/mixins';
+ $offset:10px;
  * {
     box-sizing: border-box;
 }
 glitch-effect,
-matrix-canvas {
+matrix-canvas,
+header-item {
     display: block;
+    margin: 0;
+    position: relative;
 }
 main {
     padding: $offset;
@@ -31,27 +35,31 @@ matrix-canvas {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 10px rgba(255, 255, 255, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.25), inset 0 -15px 30px rgba(0, 0, 0, 0.3);
 }
 #top-header {
+    opacity: 0;
     overflow: hidden;
     position: relative;
-    z-index: 1;
-    width: 100%;
-    height: 200px;
-    /*
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    background-color: rgba(0, 39, 94, 0.25);
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 10px rgba(255, 255, 255, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.25), inset 0 -15px 30px rgba(0, 0, 0, 0.3);
-    */
     transition: opacity 1s ease-in-out;
-    opacity: 0;
+    z-index: 1;
+    @include size(100%, 200px);
     &.visible {
         opacity: 1;
         transition-delay: 2s;
+        .header-content {
+            opacity: 1;
+            transition-delay: 2.5s;
+        }
     }
-    .header-conten {
+    .header-content {
         position: reltaive;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
         z-index: 2;
+        #header-items {
+            display: flex;
+            header-item {
+                @include size(40px, 40px);
+            }
+        }
     }
     glitch-effect {
         padding: 20px 0 0 20px;
