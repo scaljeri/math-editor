@@ -21,7 +21,7 @@ module.exports = function (gulp, $) {
     gulp.task('watch', function () {
         livereload.listen();
 
-        gulp.watch('resources/elements/**/*.scss', ['css']);
+        gulp.watch(['resources/elements/**/*.scss'], ['css']);
         gulp.watch('resources/scss/demo.scss', ['main-css']);
 
         gulp.watch([
@@ -37,8 +37,8 @@ module.exports = function (gulp, $) {
                 .pipe(gulp.dest(path.dirname(event.path)));
         });*/
 
-        gulp.src(['demo/index.html', 'demo/custom-elements/**/*'])
-            .pipe(watch(['demo/index.html', 'demo/custom-elements/**/*']))
+        gulp.src(['demo/index.html'])//, 'demo/custom-elements/**/*'])
+            .pipe(watch(['demo/index.html']))//, 'demo/custom-elements/**/*']))
             .pipe(livereload());
     });
 };

@@ -38,5 +38,8 @@
   "scripts": {},
   "engines": {
     "node": "0.10.26"
+  },
+  "dependencies": {
+    "gulp-merge": "^0.1.0"
   }
 }

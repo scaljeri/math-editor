@@ -1,6 +1,39 @@
 @import '../../scss/mixins';
 
+$bg: rgba(248,248,255,.3);
+$side: 40px;
+$width: 70px;
+$top: 20px; //sqrt(pow($side, 2px) - pow($width/2px, 2));
+
 #logo, img {
     @include size(100%, 100%);
+}
+
+#hex:before {
+    content: " ";
+    border-bottom: $top solid $bg;
+    border-left: $width/2 solid transparent;
+    border-right: $width/2 solid transparent;
+    position: absolute;
+    top: -$top;
+    @include size(0,0);
+}
+
+#hex {
+    margin-top: $top;
+    width: $width;
+    height: $side;
+    background-color: $bg;
+    position: relative;
+}
+
+#hex:after {
+    content: "";
+    width: 0;
+    position: absolute;
+    bottom: -$top;
+    border-top: $top solid $bg;
+    border-left: $width/2 solid transparent;
+    border-right: $width/2 solid transparent;
 }
 

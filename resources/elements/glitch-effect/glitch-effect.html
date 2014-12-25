@@ -1,26 +1,21 @@
 <polymer-element name="glitch-effect" attributes="text fontSize">
     <template>
         <link rel="stylesheet" href="glitch-effect.css">
-        <span id="parent">
- <!--
-        <template repeat="{{x, i in glitch}}">
-            <span style="transform: translate({{x}}, {{i}}px);">{{text}}</span>
-    </template>
-    -->
 
-    <span id="parent">
-        <template if="{{original}}">
-            <span id="original-content" class="content" style="font-size: {{fontSize}}px">{{text}}</span>
-    </template>
+        <p id="parent">
+            <template if="{{original}}">
+                <span id="original-content" class="content" style="font-size: {{fontSize}}px">{{text}}</span>
+            </template>
 
-    <template if="{{!original}}" repeat="{{x, i in glitch}}">
-        <span class="content partial" style="transform: translate({{x}}px, {{2*i}}px);width:{{width}}px; font-size: {{fontSize}}px">
-                <span class="partial-content" style="transform: translate(0px, -{{2*i}}px);width:{{width -10}}px;font-size:{{fontSize}}px">{{text}}</span>
-        </span>
-    </template>
-    </span>
-
-    </span>
+            <template if="{{!original}}">
+                <template repeat="{{x, i in glitch}}">
+                    <span class="content partial" style="transform: translate({{x}}px, {{2*i}}px);width:{{width}}px; font-size: {{fontSize}}px">
+                        <span class="partial-content" style="transform: translate(0px, -{{2*i}}px);width:{{width -10}}px;font-size:{{fontSize}}px">{{text}}</span>
+                    </span>
+                </template>
+                <span class="dummy-content">&nbsp;</span>
+            </template>
+        </p>
     </template>
 
     <script>

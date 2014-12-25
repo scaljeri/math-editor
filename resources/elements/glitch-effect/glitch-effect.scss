@@ -1,12 +1,17 @@
 #parent {
     position: relative;
 }
-.content {
+.content, .dummy-content {
     color: #fff;
     font-size: 18px;
     font-family: Vitamin, Arail;
     display: block;
 }
+
+.dummy-content {
+    font-size: 28px;
+}
+
 .partial {
     display: block;
     height: 2px;

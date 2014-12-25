@@ -2,7 +2,8 @@
 var es = require('event-stream'),
     fs = require('fs'),
     path = require('path'),
-    livereload = require('gulp-livereload');
+    livereload = require('gulp-livereload'),
+    merge = require('gulp-merge');
 
 module.exports = function (gulp, $) {
     'use strict';
@@ -19,15 +20,17 @@ module.exports = function (gulp, $) {
         var taskList = [],
             folders = getFolders('resources/elements/');
 
+        console.log("COMPILE SCSS");
+
         // https://github.com/gulpjs/gulp/blob/master/docs/recipes/running-task-steps-per-folder.md
         var taskList = folders.map(function (dir) {
             return scss2css('resources/elements/' + dir + '/*.scss',    // input
-                           'demo/custom-elements/' + dir,              // output
-                           { sourceMap: true});                        // config
+                           'demo/custom-elements/' + dir,               // output
+                           { sourceMap: true});                         // config
         });
 
-        // return merge(tasksList);
-        return es.merge.apply(es, taskList)
+        merge(taskList)
+        //return es.merge.apply(es, taskList)
             .pipe(livereload());
     });
 };
