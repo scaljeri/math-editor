@@ -8,8 +8,9 @@
     display: block;
 }
 
-.dummy-content {
+.ghost-content {
     font-size: 28px;
+    visibility: hidden;
 }
 
 .partial {

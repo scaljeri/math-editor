@@ -8,12 +8,12 @@
             </template>
 
             <template if="{{!original}}">
+                <span class="ghost-content">{{text}}</span>
                 <template repeat="{{x, i in glitch}}">
                     <span class="content partial" style="transform: translate({{x}}px, {{2*i}}px);width:{{width}}px; font-size: {{fontSize}}px">
                         <span class="partial-content" style="transform: translate(0px, -{{2*i}}px);width:{{width -10}}px;font-size:{{fontSize}}px">{{text}}</span>
                     </span>
                 </template>
-                <span class="dummy-content">&nbsp;</span>
             </template>
         </p>
     </template>

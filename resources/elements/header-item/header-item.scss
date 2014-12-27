@@ -18,7 +18,7 @@ img {
 }
 
 // http://jtauber.github.io/articles/css-hexagon.html
-#hex {
+.hex {
     display: block;
     margin-top: $top;
     background-color: $bg;
@@ -68,4 +68,8 @@ img {
     &:active #logo {
         transform: translate(0, 2px);
     }
+}
+
+:target::shadow {
+     display: none!important;
 }

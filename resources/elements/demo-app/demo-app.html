@@ -1,35 +1,77 @@
 <polymer-element name="demo-app">
     <template>
+        <link rel="stylesheet" href="../../bower_components/swiper/dist/idangerous.swiper.css">
         <link rel="stylesheet" href="demo-app.css">
 
         <matrix-canvas id="bg-matrix"></matrix-canvas>
-        <main style="background-color: grey">
+        <main>
             <header id="top-header" class="glass">
-                <matrix-canvas id="bg-matrix-blurred" clone></matrix-canvas>
-                <section class="header-content">
-                    <glitch-effect text="A Polymer Formula Element"></glitch-effect>
+                <matrix-canvas class="bg-matrix-blurred" clone></matrix-canvas>
+                <section horizontal center-justified layout class="header-content">
+                    <glitch-effect text="Polymer"></glitch-effect>
 
-                    <div id="header-items" on-change="{{handleItemChange}}">
-                         <header-item logo="/images/kformula_kfo.png" itemName="input" selected="{{item}}"></header-item>
-                         <header-item logo="/images/TeXShop_icon.png" itemName="latex" selected="{{item}}"></header-item>
-                         <header-item logo="/images/input-icon.png" itemName="edit" selected="{{item}}"></header-item>
+                    <div id="header-items">
+                        <header-item logo="/images/kformula_kfo.png" itemName="input" selected="{{selectedItem}}"></header-item>
+                        <header-item logo="/images/TeXShop_icon.png" itemName="latex" selected="{{selectedItem}}"></header-item>
+                        <header-item logo="/images/input-icon.png" itemName="edit" selected="{{selectedItem}}"></header-item>
                     </div>
+
+                    <glitch-effect text="Formula"></glitch-effect>
                 </section>
             </header>
+
+            <section id="content" class="glass">
+                <matrix-canvas class="bg-matrix-blurred" clone></matrix-canvas>
+
+                <div id="swiper" class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <!--First Slide-->
+                        <div class="swiper-slide" style="background-color: red">
+                            <!-- Any HTML content of the first slide goes here -->
+                            <div style="height: height:100%;"></div>
+                        </div>
+
+                        <!--Second Slide-->
+                        <div class="swiper-slide" style="background-color: blue">
+                            <div style="height: 100px;width: 100px;"></div>
+                            <!-- Any HTML content of the second slide goes here -->
+                        </div>
+
+                        <!--Third Slide-->
+                        <div class="swiper-slide" style="background-color: green">
+                            <div style="height: 100%;width: 100%;"></div>
+                            <!-- Any HTML content of the third slide goes here -->
+                        </div>
+                        <!--Etc..-->
+                    </div>
+                </div>
+            </section>
         </main>
 
     </template>
 
     <script>
+        var items = ['input', 'latex', 'edit'];
+
         Polymer('demo-app', {
+            selectedItem: '',
             ready: function () {
                 //this.$['top-header'].classList.add('visible');
                 setTimeout(function () {
                     this.$['top-header'].classList.add('visible');
                 }.bind(this), 0);
+                this.selectedItem = 'input';
 
             },
-            handleItemChange: function (item) {
+            domReady: function () {
+                $(this.$.swiper).swiper({
+                    //Your options here:
+                    mode: 'horizontal',
+                    loop: false
+                    //etc..
+                });
+            },
+            selectedItemChanged: function (item) {
                 debugger;
             }
         });
