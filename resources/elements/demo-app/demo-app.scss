@@ -35,12 +35,16 @@ matrix-canvas {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 10px rgba(255, 255, 255, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.25), inset 0 -15px 30px rgba(0, 0, 0, 0.3);
 }
 #top-header {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 768px;
     opacity: 0;
     overflow: hidden;
     position: relative;
     transition: opacity 1s ease-in-out;
     z-index: 1;
     @include size(100%, 200px);
+
     &.visible {
         opacity: 1;
         transition-delay: 2s;
@@ -49,15 +53,24 @@ matrix-canvas {
             transition-delay: 2.5s;
         }
     }
+
     .header-content {
         position: reltaive;
         opacity: 0;
         transition: opacity 1s ease-in-out;
         z-index: 2;
         #header-items {
+            cursor: pointer;
             display: flex;
+            justify-content: center;
+
             header-item {
-                @include size(40px, 40px);
+                margin-right: 20px;
+                @include size(70px, 80px);
+
+                &:last-child {
+                    margin-right: 0;
+                }
             }
         }
     }

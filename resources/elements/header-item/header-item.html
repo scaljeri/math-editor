@@ -1,10 +1,11 @@
-<polymer-element name="header-item" attributes="logo">
+<polymer-element name="header-item" attributes="logo itemName">
     <template>
         <link rel="stylesheet" href="header-item.css">
 
-        <div id="hex">
-            <img src="{{logo}}">
-        </div>
+        <a href="#{{itemName}}" id="hex">
+            <span id="background-circle"></span>
+            <img id="logo" src="{{logo}}">
+        </a>
     </template>
 
     <script>
