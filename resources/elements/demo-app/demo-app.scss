@@ -1,6 +1,8 @@
 @import '../../scss/mixins';
- $offset:10px;
- * {
+$offset:10px;
+$headerWidth: 768px;
+
+* {
     box-sizing: border-box;
 }
 glitch-effect,
@@ -88,7 +90,7 @@ matrix-canvas {
 #bg-matrix-blurred {
     position: absolute;
     top: -$offset;
-    left: -$offset;
+    left: calc(#{$headerWidth}/2 - 50vw);
     right: 0;
     bottom: 0;
     filter: blur(3px);

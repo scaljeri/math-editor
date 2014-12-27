@@ -6,7 +6,8 @@ $top:20px; //sqrt(pow($side, 2px) - pow($width/2px, 2));
 
 * {
     transition: all .5s; // should target specific properties
-    &: : before, &: : after {
+
+    &::before, &::after {
         transition: opacity .5s;
     }
 }
@@ -23,7 +24,7 @@ img {
     background-color: $bg;
     position: relative;
     @include size($width, $side);
-    &: : before {
+    &::before {
         content: " ";
         border-bottom: $top solid $bg;
         border-left: $width/2 solid transparent;
