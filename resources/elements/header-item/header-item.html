@@ -1,20 +1,28 @@
-<polymer-element name="header-item" attributes="logo itemName selectedItem">
+<polymer-element name="header-item" attributes="selected logo itemName">
     <template>
         <link rel="stylesheet" href="header-item.css">
 
-        <a id="{{itemName}}" href="#{{itemName}}" class="hex" on-click={{changeSelected}}>
-            <span id="background-circle"></span>
-            <img id="logo" src="{{logo}}">
-        </a>
+        <template if="{{selected !== itemName}}">
+            <a id="{{itemName}}" href="#{{itemName}}" class="hex" on-click={{changeSelected}}>
+                <span id="background-circle"></span>
+                <img id="logo" src="{{logo}}">
+            </a>
+        </template>
+
+        <template if="{{selected === itemName}}">
+            <a id="{{itemName}}" class="hex selected" on-click={{changeSelected}}>
+                <span id="background-circle"></span>
+                <img id="logo" src="{{logo}}">
+            </a>
+        </template>
     </template>
 
     <script>
         Polymer('header-item', {
-            ready: function () {
-            },
+            selected: '',
+            ready: function () {},
             changeSelected: function () {
-                console.log(this.selectedItem);
-                this.selectedItem = this.itemName;
+                this.selected = this.itemName;
             }
         });
     </script>

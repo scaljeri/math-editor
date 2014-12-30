@@ -11,9 +11,9 @@
                     <glitch-effect text="Polymer"></glitch-effect>
 
                     <div id="header-items">
-                        <header-item logo="/images/kformula_kfo.png" itemName="input" selected="{{selectedItem}}"></header-item>
-                        <header-item logo="/images/TeXShop_icon.png" itemName="latex" selected="{{selectedItem}}"></header-item>
-                        <header-item logo="/images/input-icon.png" itemName="edit" selected="{{selectedItem}}"></header-item>
+                        <header-item logo="/images/kformula_kfo.png" itemName="input" selected="{{selected}}"></header-item>
+                        <header-item logo="/images/TeXShop_icon.png" itemName="latex" selected="{{selected}}"></header-item>
+                        <header-item logo="/images/input-icon.png" itemName="edit" selected="{{selected}}"></header-item>
                     </div>
 
                     <glitch-effect text="Formula"></glitch-effect>
@@ -22,14 +22,13 @@
 
             <section id="content" class="glass">
                 <matrix-canvas class="bg-matrix-blurred" clone></matrix-canvas>
-
                 <div id="swiper" class="swiper-container">
                     <div class="swiper-wrapper">
                         <!--First Slide-->
-                        <div class="swiper-slide" style="background-color: red">
-                            <!-- Any HTML content of the first slide goes here -->
+                        <input-demo class="swiper-slide"></input-demo>
+                        <!--div class="swiper-slide" style="background-color: red">
                             <div style="height: height:100%;"></div>
-                        </div>
+                        </div>-->
 
                         <!--Second Slide-->
                         <div class="swiper-slide" style="background-color: blue">
@@ -51,10 +50,11 @@
     </template>
 
     <script>
-        var items = ['input', 'latex', 'edit'];
+        var items = ['input', 'latex', 'edit'],
+            swiper;
 
         Polymer('demo-app', {
-            selectedItem: '',
+            selected: 'input',
             ready: function () {
                 //this.$['top-header'].classList.add('visible');
                 setTimeout(function () {
@@ -64,14 +64,15 @@
 
             },
             domReady: function () {
-                $(this.$.swiper).swiper({
+                swiper = $(this.$.swiper).swiper({
                     //Your options here:
                     mode: 'horizontal',
-                    loop: false
-                    //etc..
+                    loop: false,
+                    onSlideChangeEnd: function (swiper,dir) {
+                    }
                 });
             },
-            selectedItemChanged: function (item) {
+            selectedChanged: function (item) {
                 debugger;
             }
         });

@@ -2,7 +2,8 @@
 $bg:rgba(248, 248, 255, .3);
 $side:40px;
 $width:70px;
-$top:20px; //sqrt(pow($side, 2px) - pow($width/2px, 2));
+$borderWidth:20px; //sqrt(pow($side, 2px) - pow($width/2px, 2));
+$selectedColor: #0F0;
 
 * {
     transition: all .5s; // should target specific properties
@@ -20,25 +21,25 @@ img {
 // http://jtauber.github.io/articles/css-hexagon.html
 .hex {
     display: block;
-    margin-top: $top;
+    margin-top: $borderWidth;
     background-color: $bg;
     position: relative;
     @include size($width, $side);
     &::before {
         content: " ";
-        border-bottom: $top solid $bg;
+        border-bottom: $borderWidth solid $bg;
         border-left: $width/2 solid transparent;
         border-right: $width/2 solid transparent;
         position: absolute;
-        top: -$top;
+        top: -$borderWidth;
         @include size(0, 0);
     }
     &::after {
         content: "";
         width: 0;
         position: absolute;
-        bottom: -$top;
-        border-top: $top solid $bg;
+        bottom: -$borderWidth;
+        border-top: $borderWidth solid $bg;
         border-left: $width/2 solid transparent;
         border-right: $width/2 solid transparent;
     }
@@ -51,7 +52,7 @@ img {
         @include position(absolute, -20px 0px 0 0);
         @include size($width, $width);
     }
-    &:hover {
+    &:not(.selected):hover {
         background-color: transparent;
         #background-circle {
             opacity: 1;
@@ -70,6 +71,12 @@ img {
     }
 }
 
-:target::shadow {
-     display: none!important;
+.hex.selected {
+    background-color: rgba($selectedColor, .5);
+    &::before {
+        border-bottom-color: rgba($selectedColor, .5);
+    }
+    &::after {
+         border-top-color: rgba($selectedColor, .5);
+    }
 }
