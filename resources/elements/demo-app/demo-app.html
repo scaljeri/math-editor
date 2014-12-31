@@ -64,17 +64,19 @@
 
             },
             domReady: function () {
+                //http://www.idangero.us/sliders/swiper/api.php
                 swiper = $(this.$.swiper).swiper({
-                    //Your options here:
                     mode: 'horizontal',
                     loop: false,
                     onSlideChangeEnd: function (swiper,dir) {
-                    }
+                        this.selected = items[swiper.activeIndex];
+                    }.bind(this)
                 });
             },
-            selectedChanged: function (item) {
-                debugger;
+            selectedChanged: function (oldV, newV) {
+                swiper.swipeTo(items.indexOf(newV));
             }
+
         });
     </script>
 </polymer-element>
