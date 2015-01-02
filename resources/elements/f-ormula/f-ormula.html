@@ -12,7 +12,7 @@ Element providing solution to no problem in particular.
 @status alpha
 @homepage http://polymerlabs.github.io/math-editor
 -->
-<polymer-element name="f-ormula" attributes="data format library timeSpend error">
+<polymer-element name="f-ormula" attributes="data format usedLibrary library duration error">
 
     <template>
         <link rel="stylesheet" href="f-ormula.css">
@@ -51,11 +51,14 @@ Element providing solution to no problem in particular.
                         try {
                             var startDate = new Date().getTime();
                             katex.render(f, this.$.formula);
-                            this.timeSpend = new Date().getTime() - startDate;
+                            this.duration = new Date().getTime() - startDate;
+                            this.usedLibrary = 'Katex';
                         } catch (e) {
                             this.error = e;
                             console.info('Using MathJax to render: ' + f);
-                            libraries.mathjax.render.call(this, f);
+                            setTimeout(function () { // Katex will clear this.$.formula
+                                libraries.mathjax.render.call(this, f);
+                            }.bind(this),0);
                         }
                     }
                 },
@@ -63,6 +66,7 @@ Element providing solution to no problem in particular.
                     render: function (f) {
                         this.$.formula.classList.toggle('invisible');
                         this.$.formula.innerHTML = '$' + f + '$';
+                        this.usedLibrary = 'MathJax';
 
                         MathJax.Hub.Queue(['Typeset', MathJax.Hub, this.$.formula], function () {
                             this.$.formula.classList.toggle('invisible');
@@ -124,17 +128,17 @@ Element providing solution to no problem in particular.
             Polymer('f-ormula', {
                 data: '',
                 format: '',
-                timeSpend: 0,
+                duration: 0,
                 error: '',
+                usedLibrary: '',
                 created: function () {
                   if (MathJax) {
                       MathJax.Hub.Register.StartupHook("End", function () {
-                          this.timeSpent = (MathJax.Extension.measureTime.endTime - MathJax.Extension.measureTime.startTime);
+                          this.duration = (MathJax.Extension.measureTime.endTime - MathJax.Extension.measureTime.startTime);
                       });
                   }
                 },
-                ready: function () {
-                },
+                ready: function () {},
                 dataChanged: function (oldV, newV) {
                     this.format = detectFormat(newV);
 
@@ -171,8 +175,7 @@ Element providing solution to no problem in particular.
                     //console.log(attrName, 'old: ' + oldVal, 'new:', newVal);
                 },
                 errorChanged: function () {
-                    debugger;
-                     this.$.formula.innerHMTL = '';
+                    this.$.formula.innerHTML = '';
                 }
             });
         })();

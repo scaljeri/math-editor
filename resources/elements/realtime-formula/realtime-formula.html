@@ -8,10 +8,15 @@
 
             <textarea id="formulator" placeholder="Enter your Latex, MathML or AsciiMathML here" on-click="{{focus}}" on-keyup="{{keypressHandler}}"></textarea>
             <p class="stats">
-
+                <span>Input format: {{format}}</span>
+                <span>Time spend: {{duration}}</span>
+                <span>Used library: {{usedLibrary}}</span>
             </p>
 
-            <f-ormula self-center data="{{formula}}"></f-ormula>
+            <p>
+                <span>Output:</span>
+            <f-ormula self-center data="{{formula}}" format="{{format}}" duration="{{duration}}" usedLibrary="{{usedLibrary}}"></f-ormula>
+            </p>
         </article>
     </template>
 
