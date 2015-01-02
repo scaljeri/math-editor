@@ -24,25 +24,17 @@
                 <matrix-canvas class="bg-matrix-blurred" clone></matrix-canvas>
                 <div id="swiper" class="swiper-container">
                     <div class="swiper-wrapper">
-                        <!--First Slide-->
                         <div class="swiper-slide">
                             <content-home class="demo-content"></content-home>
                         </div>
-                        <!--<input-demo class="swiper-slide"></input-demo>-->
+
                         <div class="swiper-slide">
                             <realtime-formula class="demo-content"></realtime-formula>
                         </div>
 
-                        <!--Second Slide-->
-                        <div class="swiper-slide">
-                            <latex-editor class="demo-content"></latex-editor>
-                        </div>
-
-                        <!--Third Slide-->
                         <div class="swiper-slide">
                             <formula-editor class="demo-content"></formula-editor>
                         </div>
-                        <!--Etc..-->
                     </div>
                 </div>
             </section>
@@ -55,12 +47,11 @@
             swiper;
 
         Polymer('demo-app', {
-            selected: 'home',
+            selected: 'input',
             ready: function () {
-                //this.$['top-header'].classList.add('visible');
-                setTimeout(function () {
+                //setTimeout(function () {
                     this.$['top-header'].classList.add('visible');
-                }.bind(this), 0);
+                //}.bind(this), 0);
             },
             domReady: function () {
                 //http://www.idangero.us/sliders/swiper/api.php
@@ -68,11 +59,12 @@
                     mode: 'horizontal',
                     loop: false,
                     cssWidthAndHeight: true,
+                    simulateTouch: false,
+                    initialSlide: items.indexOf(this.selected),
                     onSlideChangeEnd: function (swiper, dir) {
                         this.selected = items[swiper.activeIndex];
                     }.bind(this)
                 });
-                swiper.swipeTo(0);
             },
             selectedChanged: function (oldV, newV) {
                 swiper.swipeTo(items.indexOf(newV));

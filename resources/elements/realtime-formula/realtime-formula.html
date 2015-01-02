@@ -3,16 +3,28 @@
 <polymer-element name="realtime-formula" attributes="">
     <template>
         <link rel="stylesheet" href="realtime-formula.css">
+        <article vertical layout>
+            <glitch-effect class="header" text="formula rendering"></glitch-effect>
 
-        <article>
-            <glitch-effect class="header" text="Formula Rendering"></glitch-effect>
+            <textarea id="formulator" placeholder="Enter your Latex, MathML or AsciiMathML here" on-click="{{focus}}" on-keyup="{{keypressHandler}}"></textarea>
+            <p class="stats">
 
+            </p>
+
+            <f-ormula self-center data="{{formula}}"></f-ormula>
         </article>
     </template>
 
     <script>
         Polymer('realtime-formula', {
-            ready: function () {}
+            ready: function () {},
+            focus: function () {
+                this.$.formulator.focus(); // solve weird focus issue
+            },
+            keypressHandler: function () {
+                console.log(this.$.formulator.value);
+                 this.formula = this.$.formulator.value;
+            }
         });
     </script>
 </polymer-element>

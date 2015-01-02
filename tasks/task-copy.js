@@ -15,7 +15,8 @@ module.exports = function (gulp, $) {
             .pipe(gulp.dest('demo/images/'));
 
         getFolders('resources/elements/').map(function (element) {
-            gulp.src('resources/elements/' + element + '/' + element + '.html')
+            gulp.src(['resources/elements/' + element + '/**',            // select everything
+                      '!resources/elements/' + element + '/**/*.scss'])   // but exclude scss files
                 .pipe(gulp.dest('demo/custom-elements/' + element));
         });
 

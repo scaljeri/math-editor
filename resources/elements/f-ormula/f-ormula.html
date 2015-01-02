@@ -12,12 +12,12 @@ Element providing solution to no problem in particular.
 @status alpha
 @homepage http://polymerlabs.github.io/math-editor
 -->
-<polymer-element name="f-ormula" attributes="data format library">
+<polymer-element name="f-ormula" attributes="data format library timeSpend error">
 
     <template>
         <link rel="stylesheet" href="f-ormula.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
-        <core-ajax id="xsl" url="/math-editor/mmltex.xsl" params='{"alt":"xml"}' handleAs="xml" on-core-response="{{handleXSL}}"></core-ajax>
+        <core-ajax id="xsl" url="mmltex.xsl" params='{"alt":"xml"}' handleAs="xml" on-core-response="{{handleXSL}}"></core-ajax>
 
         <span id="formula"></span>
         <!--<math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mfrac><mrow><mi>x</mi></mrow><mrow><mi>y</mi></mrow></mfrac></mrow></math>-->
@@ -42,81 +42,69 @@ Element providing solution to no problem in particular.
               MathJax.Hub.Register.StartupHook("End Typeset", function () {
                   MathJax.Extension.measureTime.endTime = (new Date()).getTime();
               });
-
-              MathJax.Hub.Register.StartupHook("End", function () {
-                  var timeSpent = (MathJax.Extension.measureTime.endTime - MathJax.Extension.measureTime.startTime);
-                  console.log(timeSpent);
-              });
         }
 
         (function () {
-                var supported = {
-                        Latex: {
-                            render: function (f) {
-                                //return supported.MathJax.render.call(this, f);
-                                try {
-                                    katex.render(f, this.$.formula);
-                                } catch (e) {
-                                    //this.$.formula.innerHTML = 'Invalid';
-                                    this.error = e;
-                                    console.warn(e.message);
-                                    console.warn('Formua: ' + f);
-                                    console.info('Using MathJax to render formula');
-                                    supported.MathJax.render.call(this, f);
-                                }
-                            }
-                        },
-                        MathJax: {
-                            render: function (f) {
-                                this.$.formula.classList.toggle('invisible');
-                                this.$.formula.innerHTML = '$' + f + '$';
-
-                                console.log('FORMULA IS NOW: ' + this.$.formula.innerHTML);
-                                MathJax.Hub.Queue(['Typeset', MathJax.Hub, this.$.formula], function () {
-                                    this.$.formula.classList.toggle('invisible');
-                                }.bind(this));
-
-                            }
-                        },
-                        AsciiMath: {
-                            render: function (f) {
-                                var latex = AMTparseAMtoTeX(f);
-                                supported.Latex.render.call(this, latex);
-                            }
-                        },
-                        MathML: {
-                            render: function (f) {
-                                var xml = (new window.DOMParser()).parseFromString(f, "text/xml"),
-                                    xsltProcessor = new XSLTProcessor();
-
-                                this.handleXSL = function (e, response) {
-                                    xsltProcessor.importStylesheet(response.response);
-                                    resultDocument = xsltProcessor.transformToFragment(xml, document);
-                                    //this.$.xslt.appendChild(katex.render(resultDocument.textContent));
-                                    debugger;
-                                    katex.render(resultDocument.textContent.replace(/(^\$|\$$)/g, ''), this.$.formula);
-                                    //document.getElementById("example").appendChild(resultDocument);
-                        };
-
-                        this.$.xsl.go();
-
+            var libraries = {
+                katex: {
+                    render: function (f) {
+                        try {
+                            var startDate = new Date().getTime();
+                            katex.render(f, this.$.formula);
+                            this.timeSpend = new Date().getTime() - startDate;
+                        } catch (e) {
+                            this.error = e;
+                            console.info('Using MathJax to render: ' + f);
+                            libraries.mathjax.render.call(this, f);
+                        }
                     }
                 },
-                'Plain Text': {
+                mathjax: {
                     render: function (f) {
-                        this.$.formula.innerHTML = f;
+                        this.$.formula.classList.toggle('invisible');
+                        this.$.formula.innerHTML = '$' + f + '$';
+
+                        MathJax.Hub.Queue(['Typeset', MathJax.Hub, this.$.formula], function () {
+                            this.$.formula.classList.toggle('invisible');
+                        }.bind(this));
+
                     }
                 }
-            }
+            },
+                formats = {
+                    Latex: {
+                        convert: function (f, cb) {
+                            cb(f);
+                        }
+                    },
+                    AsciiMath: {
+                        convert: function (f, cb) {
+                            cb(AMTparseAMtoTeX(f));
+                        }
+                    },
+                    MathML: {
+                        convert: function (f, cb) {
+                            var xml, xsltProcessor = new XSLTProcessor();
 
-            function mathML2Tex(f) {
-                /*
-                callback.push(transfromMathML2Tex.bind(
+                            this.handleXSL = function (e, response) {
+                                xsltProcessor.importStylesheet(response.response);
+                                resultDocument = xsltProcessor.transformToFragment(xml, document);
+                                cb(resultDocument.textContent.replace(/(^\$|\$$)/g, ''));
+                            };
 
-                }.bind(this));
+                            if (!f.match(/xmlns/)) { // fix missing namespace
+                                f = f.replace(/^<math\s*>/, '<math xmlns="http://www.w3.org/1998/Math/MathML">');
+                            }
 
-                this.$.xsl.go();
-                */
+                            xml = (new window.DOMParser()).parseFromString(f, "text/xml");
+                            if (!xml.querySelector('parsererror')) {
+                                this.$.xsl.go();
+                            }
+                            else {
+                                this.error = 'Your MathML is not valid XML';
+                            }
+                        }
+                    }
             }
 
             function detectFormat(formula) {
@@ -134,22 +122,30 @@ Element providing solution to no problem in particular.
             }
 
             Polymer('f-ormula', {
-                created: function () {},
+                data: '',
+                format: '',
+                timeSpend: 0,
+                error: '',
+                created: function () {
+                  if (MathJax) {
+                      MathJax.Hub.Register.StartupHook("End", function () {
+                          this.timeSpent = (MathJax.Extension.measureTime.endTime - MathJax.Extension.measureTime.startTime);
+                      });
+                  }
+                },
                 ready: function () {
                 },
                 dataChanged: function (oldV, newV) {
-                    if (newV) {
-                        this.format = detectFormat(newV);
-                        supported[this.format].render.call(this, newV);
+                    this.format = detectFormat(newV);
 
-                        /*
-                        console.log(this.format);
-                        //this.$.formula.innerHTML = this.formula;
-                        if (this.format === 'latex') {
-                            katex.render(newV, this.$.formula);
-                        }
-                        */
+                    if (this.format !== 'Plain Text') {
+                        formats[this.format].convert.call(this, newV, function (latexFormula) {
+                            libraries[this.library ? this.library.toLowerCase() : 'katex'].render.call(this, latexFormula);
+                        }.bind(this));
                     }
+                    else {
+                        this.$.formula.innerHTML = newV;
+                   }
 
                     //console.log('formula=' + AMTparseAMtoTeX(this.formula));
                     //$(this.$.formula).mathquill('latex', '\frac{d}{dx}\sqrt{x}').mathquill('redraw');//AMTparseAMtoTeX(this.formula));
@@ -166,8 +162,6 @@ Element providing solution to no problem in particular.
                     var input = AMTparseAMtoTeX('f(x)={(text(-)2/x, text(voor),x &lt; text(-)1),(text(-)2x, text(voor), text(-)1 ≤x≤1) , ( text(-)2/x , text(voor) , x&gt;1):}');
 
 */
-                    //input = input.replace(/\\\\/g, '\\');
-                    //katex.render(this.formula, this.$.formula);
                 },
                 attached: function () {},
                 domReady: function () {},
@@ -176,19 +170,9 @@ Element providing solution to no problem in particular.
                     //var newVal = this.getAttribute(attrName);
                     //console.log(attrName, 'old: ' + oldVal, 'new:', newVal);
                 },
-                _handleXSLT: function (e, response) {
-                    /*
-                    var xmlStr = '<math xmlns="
-                                    http: //www.w3.org/1998/Math/MathML"><mrow><mfrac><mrow><mi>x</mi></mrow><mrow><mi>y</mi></mrow></mfrac></mrow></math>';
-                                    var xml = (new window.DOMParser()).parseFromString(xmlStr, "text/xml");
-
-                                    var xsltProcessor = new XSLTProcessor();
-                                    xsltProcessor.importStylesheet(response.response);
-                                    resultDocument = xsltProcessor.transformToFragment(xml, document);
-                                    //this.$.xslt.appendChild(katex.render(resultDocument.textContent));
-                                    katex.render(resultDocument.textContent.replace(/(^\$|\$$)/g, ''), this.$.xslt);
-                                    //document.getElementById("example").appendChild(resultDocument);
-                                    */
+                errorChanged: function () {
+                    debugger;
+                     this.$.formula.innerHMTL = '';
                 }
             });
         })();
