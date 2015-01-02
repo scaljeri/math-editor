@@ -11,11 +11,18 @@
                 <span>Input format: {{format}}</span>
                 <span>Time spend: {{duration}}</span>
                 <span>Used library: {{usedLibrary}}</span>
+                <br>
+                <template if="{{!error}}">
+                    <span>Error: </span>
+                </template>
+                <template if="{{error}}">
+                    <span class="error truncate">Error: {{error}}</span><span class="error">(Checkout the console for more details)</span>
+                </template>
             </p>
 
             <p>
                 <span>Output:</span>
-            <f-ormula self-center data="{{formula}}" format="{{format}}" duration="{{duration}}" usedLibrary="{{usedLibrary}}"></f-ormula>
+            <f-ormula self-center data="{{formula}}" format="{{format}}" duration="{{duration}}" usedLibrary="{{usedLibrary}}" error="{{error}}"></f-ormula>
             </p>
         </article>
     </template>

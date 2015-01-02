@@ -28,3 +28,18 @@ glitch-effect.header {
 f-ormula {
     display: inline;
 }
+
+.stats span {
+    margin-right: 20px;
+
+    &.error {
+         display: inline-block;
+    }
+}
+
+.truncate {
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

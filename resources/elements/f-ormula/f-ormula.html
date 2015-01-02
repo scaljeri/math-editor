@@ -34,14 +34,6 @@ Element providing solution to no problem in particular.
                   //SVG: { linebreaks: { automatic: true } }
                   'HTML-CSS': {linebreaks: {automatic: true}}
               });
-              MathJax.Extension.measureTime = {};
-              MathJax.Hub.Register.StartupHook("Begin Typeset", function () {
-                  MathJax.Extension.measureTime.startTime = (new Date()).getTime();
-              });
-
-              MathJax.Hub.Register.StartupHook("End Typeset", function () {
-                  MathJax.Extension.measureTime.endTime = (new Date()).getTime();
-              });
         }
 
         (function () {
@@ -68,8 +60,10 @@ Element providing solution to no problem in particular.
                         this.$.formula.innerHTML = '$' + f + '$';
                         this.usedLibrary = 'MathJax';
 
+                        var startTime = new Date().getTime();
                         MathJax.Hub.Queue(['Typeset', MathJax.Hub, this.$.formula], function () {
                             this.$.formula.classList.toggle('invisible');
+                            this.duration = new Date().getTime() - startTime;
                         }.bind(this));
 
                     }
@@ -131,13 +125,7 @@ Element providing solution to no problem in particular.
                 duration: 0,
                 error: '',
                 usedLibrary: '',
-                created: function () {
-                  if (MathJax) {
-                      MathJax.Hub.Register.StartupHook("End", function () {
-                          this.duration = (MathJax.Extension.measureTime.endTime - MathJax.Extension.measureTime.startTime);
-                      });
-                  }
-                },
+                created: function () {},
                 ready: function () {},
                 dataChanged: function (oldV, newV) {
                     this.format = detectFormat(newV);
@@ -176,6 +164,9 @@ Element providing solution to no problem in particular.
                 },
                 errorChanged: function () {
                     this.$.formula.innerHTML = '';
+                    console.log('-----------------------------');
+                    console.log('Formula: ' + this.data);
+                    console.log('Error Msg: ' + this.error);
                 }
             });
         })();
