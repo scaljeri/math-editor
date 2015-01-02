@@ -11,8 +11,8 @@
                     <glitch-effect text="Polymer"></glitch-effect>
 
                     <div id="header-items">
+                        <header-item logo="/images/home-icon.png" itemName="home" selected="{{selected}}"></header-item>
                         <header-item logo="/images/kformula_kfo.png" itemName="input" selected="{{selected}}"></header-item>
-                        <header-item logo="/images/TeXShop_icon.png" itemName="latex" selected="{{selected}}"></header-item>
                         <header-item logo="/images/input-icon.png" itemName="edit" selected="{{selected}}"></header-item>
                     </div>
 
@@ -25,21 +25,22 @@
                 <div id="swiper" class="swiper-container">
                     <div class="swiper-wrapper">
                         <!--First Slide-->
-                        <input-demo class="swiper-slide"></input-demo>
-                        <!--div class="swiper-slide" style="background-color: red">
-                            <div style="height: height:100%;"></div>
-                        </div>-->
+                        <div class="swiper-slide">
+                            <content-home class="demo-content"></content-home>
+                        </div>
+                        <!--<input-demo class="swiper-slide"></input-demo>-->
+                        <div class="swiper-slide">
+                            <realtime-formula class="demo-content"></realtime-formula>
+                        </div>
 
                         <!--Second Slide-->
-                        <div class="swiper-slide" style="background-color: blue">
-                            <div style="height: 100px;width: 100px;"></div>
-                            <!-- Any HTML content of the second slide goes here -->
+                        <div class="swiper-slide">
+                            <latex-editor class="demo-content"></latex-editor>
                         </div>
 
                         <!--Third Slide-->
-                        <div class="swiper-slide" style="background-color: green">
-                            <div style="height: 100%;width: 100%;"></div>
-                            <!-- Any HTML content of the third slide goes here -->
+                        <div class="swiper-slide">
+                            <formula-editor class="demo-content"></formula-editor>
                         </div>
                         <!--Etc..-->
                     </div>
@@ -50,33 +51,32 @@
     </template>
 
     <script>
-        var items = ['input', 'latex', 'edit'],
+        var items = ['home', 'input', 'edit'],
             swiper;
 
         Polymer('demo-app', {
-            selected: 'input',
+            selected: 'home',
             ready: function () {
                 //this.$['top-header'].classList.add('visible');
                 setTimeout(function () {
                     this.$['top-header'].classList.add('visible');
                 }.bind(this), 0);
-                this.selectedItem = 'input';
-
             },
             domReady: function () {
                 //http://www.idangero.us/sliders/swiper/api.php
                 swiper = $(this.$.swiper).swiper({
                     mode: 'horizontal',
                     loop: false,
-                    onSlideChangeEnd: function (swiper,dir) {
+                    cssWidthAndHeight: true,
+                    onSlideChangeEnd: function (swiper, dir) {
                         this.selected = items[swiper.activeIndex];
                     }.bind(this)
                 });
+                swiper.swipeTo(0);
             },
             selectedChanged: function (oldV, newV) {
                 swiper.swipeTo(items.indexOf(newV));
             }
-
         });
     </script>
 </polymer-element>

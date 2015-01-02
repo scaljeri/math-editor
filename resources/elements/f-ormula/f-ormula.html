@@ -1,75 +1,101 @@
-<!--
-    @license
-    Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
-    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-    Code distributed by Google as part of the polymer project is also
-    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <!--
 Element providing solution to no problem in particular.
 
 ##### Example
 
-    <math-editor></math-editor>
+    <f-ormula></f-ormula>
 
 @element math-editor
 @blurb Element providing solution to no problem in particular.
 @status alpha
 @homepage http://polymerlabs.github.io/math-editor
 -->
-<polymer-element name="math-editor" attributes="formula format">
+<polymer-element name="f-ormula" attributes="data format library">
 
     <template>
-        <link rel="stylesheet" href="math-editor.css">
+        <link rel="stylesheet" href="f-ormula.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
         <core-ajax id="xsl" url="/math-editor/mmltex.xsl" params='{"alt":"xml"}' handleAs="xml" on-core-response="{{handleXSL}}"></core-ajax>
 
-        <article>
-            <span>Formula: </span><span id="formula"></span>
-        </article>
-        <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mfrac><mrow><mi>x</mi></mrow><mrow><mi>y</mi></mrow></mfrac></mrow></math>
+        <span id="formula"></span>
+        <!--<math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mfrac><mrow><mi>x</mi></mrow><mrow><mi>y</mi></mrow></mfrac></mrow></math>-->
     </template>
 
     <script>
         var xsl, callback = [];
 
-        (function () {
-            var supported = {
-                Latex: {
-                    render: function (f) {
-                        try {
-                            katex.render(f, this.$.formula);
-                        } catch (e) {
-                            this.$.formula.innerHTML = 'Invalid';
-                            this.error = e;
-                            console.warn(e.message);
-                            console.warn('Formua: ' + f);
-                        }
-                    }
-                },
-                AsciiMath: {
-                    render: function (f) {
-                        var latex = AMTparseAMtoTeX(f);
-                        supported.Latex.render.call(this, latex);
-                    }
-                },
-                MathML: {
-                    render: function (f) {
-                        var xml = (new window.DOMParser()).parseFromString(f, "text/xml"),
-                            xsltProcessor = new XSLTProcessor();
+        if (MathJax) { // configure MathJax
+              MathJax.Hub.Config({
+                  tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] },
+                  jax: ['input/TeX', 'output/HTML-CSS'],
+                  displayAlign: 'left',
+                  //SVG: { linebreaks: { automatic: true } }
+                  'HTML-CSS': {linebreaks: {automatic: true}}
+              });
+              MathJax.Extension.measureTime = {};
+              MathJax.Hub.Register.StartupHook("Begin Typeset", function () {
+                  MathJax.Extension.measureTime.startTime = (new Date()).getTime();
+              });
 
-                        debugger;
-                        this.handleXSL = function (e, response) {
-                            xsltProcessor.importStylesheet(response.response);
-                            resultDocument = xsltProcessor.transformToFragment(xml, document);
-                            //this.$.xslt.appendChild(katex.render(resultDocument.textContent));
-                            debugger;
-                            katex.render(resultDocument.textContent.replace(/(^\$|\$$)/g, ''), this.$.formula);
-                            //document.getElementById("example").appendChild(resultDocument);
+              MathJax.Hub.Register.StartupHook("End Typeset", function () {
+                  MathJax.Extension.measureTime.endTime = (new Date()).getTime();
+              });
+
+              MathJax.Hub.Register.StartupHook("End", function () {
+                  var timeSpent = (MathJax.Extension.measureTime.endTime - MathJax.Extension.measureTime.startTime);
+                  console.log(timeSpent);
+              });
+        }
+
+        (function () {
+                var supported = {
+                        Latex: {
+                            render: function (f) {
+                                //return supported.MathJax.render.call(this, f);
+                                try {
+                                    katex.render(f, this.$.formula);
+                                } catch (e) {
+                                    //this.$.formula.innerHTML = 'Invalid';
+                                    this.error = e;
+                                    console.warn(e.message);
+                                    console.warn('Formua: ' + f);
+                                    console.info('Using MathJax to render formula');
+                                    supported.MathJax.render.call(this, f);
+                                }
+                            }
+                        },
+                        MathJax: {
+                            render: function (f) {
+                                this.$.formula.classList.toggle('invisible');
+                                this.$.formula.innerHTML = '$' + f + '$';
+
+                                console.log('FORMULA IS NOW: ' + this.$.formula.innerHTML);
+                                MathJax.Hub.Queue(['Typeset', MathJax.Hub, this.$.formula], function () {
+                                    this.$.formula.classList.toggle('invisible');
+                                }.bind(this));
+
+                            }
+                        },
+                        AsciiMath: {
+                            render: function (f) {
+                                var latex = AMTparseAMtoTeX(f);
+                                supported.Latex.render.call(this, latex);
+                            }
+                        },
+                        MathML: {
+                            render: function (f) {
+                                var xml = (new window.DOMParser()).parseFromString(f, "text/xml"),
+                                    xsltProcessor = new XSLTProcessor();
+
+                                this.handleXSL = function (e, response) {
+                                    xsltProcessor.importStylesheet(response.response);
+                                    resultDocument = xsltProcessor.transformToFragment(xml, document);
+                                    //this.$.xslt.appendChild(katex.render(resultDocument.textContent));
+                                    debugger;
+                                    katex.render(resultDocument.textContent.replace(/(^\$|\$$)/g, ''), this.$.formula);
+                                    //document.getElementById("example").appendChild(resultDocument);
                         };
 
                         this.$.xsl.go();
@@ -107,11 +133,11 @@ Element providing solution to no problem in particular.
                 return retVal;
             }
 
-            Polymer('math-editor', {
+            Polymer('f-ormula', {
                 created: function () {},
                 ready: function () {
                 },
-                formulaChanged: function (oldV, newV) {
+                dataChanged: function (oldV, newV) {
                     if (newV) {
                         this.format = detectFormat(newV);
                         supported[this.format].render.call(this, newV);
@@ -152,23 +178,24 @@ Element providing solution to no problem in particular.
                 },
                 _handleXSLT: function (e, response) {
                     /*
-                    var xmlStr = '<math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mfrac><mrow><mi>x</mi></mrow><mrow><mi>y</mi></mrow></mfrac></mrow></math>';
-                    var xml = (new window.DOMParser()).parseFromString(xmlStr, "text/xml");
+                    var xmlStr = '<math xmlns="
+                                    http: //www.w3.org/1998/Math/MathML"><mrow><mfrac><mrow><mi>x</mi></mrow><mrow><mi>y</mi></mrow></mfrac></mrow></math>';
+                                    var xml = (new window.DOMParser()).parseFromString(xmlStr, "text/xml");
 
-                    var xsltProcessor = new XSLTProcessor();
-                    xsltProcessor.importStylesheet(response.response);
-                    resultDocument = xsltProcessor.transformToFragment(xml, document);
-                    //this.$.xslt.appendChild(katex.render(resultDocument.textContent));
-                    katex.render(resultDocument.textContent.replace(/(^\$|\$$)/g, ''), this.$.xslt);
-                    //document.getElementById("example").appendChild(resultDocument);
-                    */
+                                    var xsltProcessor = new XSLTProcessor();
+                                    xsltProcessor.importStylesheet(response.response);
+                                    resultDocument = xsltProcessor.transformToFragment(xml, document);
+                                    //this.$.xslt.appendChild(katex.render(resultDocument.textContent));
+                                    katex.render(resultDocument.textContent.replace(/(^\$|\$$)/g, ''), this.$.xslt);
+                                    //document.getElementById("example").appendChild(resultDocument);
+                                    */
                 }
             });
         })();
 
         /*
-    Polymer({
-      /**
+                                        Polymer({
+                                                /**
        * The `author` attribute sets an initial author
        *
        * @attribute author
@@ -213,7 +240,7 @@ Element providing solution to no problem in particular.
        *   @param {string} detail.sound An amazing sound.
        */
 
-        /**
+                                                /**
        * The `fireLasers` method will fire the lasers. At least
        * it will dispatch an event that claims lasers were fired :)
        *
@@ -223,7 +250,7 @@ Element providing solution to no problem in particular.
         this.fire('math-editor-lasers-success', { sound: 'Pew pew pew!' });
       }*/
 
-         //});
+                                                //});
     </script>
 
 </polymer-element>

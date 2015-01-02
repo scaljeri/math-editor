@@ -1,14 +1,31 @@
-* { outline: 0; }
-div, span,o
+glitch-effect,
+matrix-canvas,
+header-item,
+input-demo,
+content-home,
+realtime-formula,
+latex-editor,
+formula-editor {
+    display: block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+* {
+    box-sizing: border-box;
+    outline: 0;
+}
+div, span,
 h1, h2, h3,
 img,
 form, label,
 article, canvas, details,
 footer, header, hgroup, menu, nav, section {
+    background: transparent;
+    border: 0;
+    font-size: 100%;
     margin: 0;
     padding: 0;
-    border: 0;
-    font-szie: 100%;
     vertical-align: baseline;
-    background: transparent;
 }

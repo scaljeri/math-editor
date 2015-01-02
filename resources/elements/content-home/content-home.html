@@ -1,0 +1,40 @@
+<link rel="import" href="/custom-elements/f-ormula/f-ormula.html">
+
+<polymer-element name="content-home" attributes="">
+    <template>
+        <link rel="stylesheet" href="content-home.css">
+
+        <article>
+            <glitch-effect class="header" text="home"></glitch-effect>
+
+            <p>The purpose of this site is to demonstrate formula rendering in the browser. I've written a custom web-component which renders any formula defined in of the following formats:
+                <ol>
+                    <li>AsciiMathML</li>
+                    <li>Latex</li>
+                    <li>MathML</li>
+                </ol>
+            </p>
+
+            <!--<f-ormula data="\[\begin{aligned} \dot{x} & = \sigma(y-x) \\ \dot{y} & = \rho x – y – xz \\ \dot{z} & = -\beta z + xy \end{aligned} \]"></f-ormula>-->
+            <div horizontal layout wrap>
+            <f-ormula self-center data="k_{n+1} = n^2 + k_n^2 - k_{n-1}"></f-ormula>
+           <f-ormula self-center data="\lim\limits_{x\to 0}{\frac{e^x-1}{2x}}\overset{\left[\frac{0}{0}\right]}{\underset{\mathrm{H}}{=}}\lim\limits_{x\to 0}{\frac{e^x}{2}}={\frac{1}{2}}"></f-ormula>
+            <f-ormula self-center data="\sideset{_1^2}{_3^4}\prod_a^b"></f-ormula>
+            <f-ormula self-center data="{}_1^2\!\Omega_3^4"></f-ormula>
+            <f-ormula self-center data="f(n) = \begin{cases} n/2, & \text{if }n\text{ is even} \\ 3n+1, & \text{if }n\text{ is odd} \end{cases}"></f-ormula>
+            <f-ormula self-center data="\begin{array}{|c|c||c|} a & b & S \\ \hline 0&0&1\\ 0&1&1\\ 1&0&1\\ 1&1&0\\ \end{array}"></f-ormula>
+            <f-ormula self-center data="\begin{bmatrix} 0 & \cdots & 0 \\ \vdots & \ddots & \vdots \\ 0 & \cdots & 0 \end{bmatrix}"></f-ormula>
+            <f-ormula self-center library="MathJax" data="\{ \bigl\{ \Bigl\{ \biggl\{ \Biggl\{ x^2 \Biggr\rangle \biggr\rangle \Bigr\rangle \bigr\rangle \rangle"></f-ormula>
+            <f-ormula self-center data="\overbrace{ 1+2+\cdots+100 }^{5050}"></f-ormula>
+            <f-ormula self-center data="\iiint\limits_E \, dx\,dy\,dz"></f-ormula>
+            <f-ormula self-center data="\overrightarrow{a b} \ \overleftarrow{c d} \ \widehat{d e f}"></f-ormula>
+        </div>
+        </article>
+    </template>
+
+    <script>
+        Polymer('content-home', {
+            ready: function () {}
+        });
+    </script>
+</polymer-element>

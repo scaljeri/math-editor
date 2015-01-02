@@ -21,7 +21,8 @@
         Polymer('header-item', {
             selected: '',
             ready: function () {},
-            changeSelected: function () {
+            changeSelected: function (oldV, newV) {
+                console.log(this.selected + ' --> ' + this.itemName);
                 this.selected = this.itemName;
             }
         });

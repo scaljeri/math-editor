@@ -1,0 +1,18 @@
+:host {
+  display: block;
+}
+
+/* To ensure your styling works under the Shadow DOM polyfill, see
+   www.polymer-project.org/docs/polymer/styling.html#directives */
+polyfill-next-selector { content: ':host > h2'; }
+::content h2 {
+  color: blue;
+}
+
+div {
+    display: inline-block;
+}
+
+.invisible {
+    visibility: hidden;
+}
