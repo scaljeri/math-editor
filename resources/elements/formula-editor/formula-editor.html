@@ -2,16 +2,32 @@
 
 <polymer-element name="formula-editor" attributes="">
     <template>
+        <link rel="stylesheet" type="text/css" href="../../mathquill/build/mathquill.css">
         <link rel="stylesheet" href="formula-editor.css">
 
-        <article>
+        <article vertical layout>
             <glitch-effect class="header" text="formula editor"></glitch-effect>
+
+            <span self-center id="editor" class="mathquill-editable" on-keyup="{{handleEditorInput}}">\frac{d}{dx}\sqrt{x} = \frac{d}{dx}x^{\frac{1}{2}} = \frac{1}{2}x^{-\frac{1}{2}} = \frac{1}{2\sqrt{x}}</span>
+
+            <textarea id="latex" on-keyup="{{handleLatexInput}}"></textarea>
         </article>
     </template>
 
     <script>
         Polymer('formula-editor', {
-            ready: function () {}
+            ready: function () {},
+            domReady: function () {
+                $(this.$.editor).mathquill('editable');
+                this.$.latex.value = $(this.$.editor).mathquill('latex');
+            },
+            handleLatexInput: function () {
+                //$(this.$.editor).mathquill('latex', this.latex).mathquill('redraw');
+                $(this.$.editor).mathquill('latex', this.$.latex.value);//.mathquill('redraw');
+            },
+            handleEditorInput: function () {
+                this.$.latex.value = $(this.$.editor).mathquill('latex');
+            }
         });
     </script>
 </polymer-element>

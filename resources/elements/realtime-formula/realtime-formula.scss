@@ -1,6 +1,7 @@
 @import '../../scss/globals';
 @import '../../scss/mixins/reset-small';
 @import '../../scss/mixins/utils';
+@import '../../scss/placeholders/textarea';
 
 :host {
     padding: 0 50px;
@@ -14,15 +15,7 @@ glitch-effect.header {
 }
 
 #formulator {
-    background-color: rgba(255,255,255,.8);
-    box-shadow: inset 4px 5px 7px -6px rgba(50, 50, 50, 0.75);
-    //font-family: $font-text;
-    font-size: 20px;
-    margin: 20px 0;
-    padding: 10px;
-    position: relative;
-    z-index: 100;
-    @include size(100%, 200px);
+    @extend %textarea;
 }
 
 f-ormula {
