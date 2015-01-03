@@ -72,19 +72,19 @@ a:active {
             animation-delay: 8s; }
 
 @-webkit-keyframes carousel {
-  /* line 30, /Users/lucas/dev/polymer-math-editor/resources/elements/content-home/formula-animation */
+  /* line 27, /Users/lucas/dev/polymer-math-editor/resources/elements/content-home/formula-animation */
   0% {
     opacity: 0; }
 
-  /* line 33, /Users/lucas/dev/polymer-math-editor/resources/elements/content-home/formula-animation */
+  /* line 30, /Users/lucas/dev/polymer-math-editor/resources/elements/content-home/formula-animation */
   33% {
     opacity: 1; }
 
-  /* line 36, /Users/lucas/dev/polymer-math-editor/resources/elements/content-home/formula-animation */
+  /* line 33, /Users/lucas/dev/polymer-math-editor/resources/elements/content-home/formula-animation */
   34% {
     opacity: 0; }
 
-  /* line 39, /Users/lucas/dev/polymer-math-editor/resources/elements/content-home/formula-animation */
+  /* line 36, /Users/lucas/dev/polymer-math-editor/resources/elements/content-home/formula-animation */
   100% {
     opacity: 0; } }
 
@@ -95,18 +95,30 @@ a:active {
   color: #fff; }
 
 /* line 11, /Users/lucas/dev/polymer-math-editor/resources/elements/content-home/content-home.scss */
+.chrome-only {
+  background-image: url(../../images/chrome-icon.png);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 40px 40px;
+  line-height: 40px;
+  padding-right: 50px;
+  position: absolute;
+  top: 20px;
+  right: 20px; }
+
+/* line 21, /Users/lucas/dev/polymer-math-editor/resources/elements/content-home/content-home.scss */
 glitch-effect.header {
   height: 40px; }
 
-/* line 15, /Users/lucas/dev/polymer-math-editor/resources/elements/content-home/content-home.scss */
+/* line 25, /Users/lucas/dev/polymer-math-editor/resources/elements/content-home/content-home.scss */
 p, li {
   text-shadow: 0px 0px 1px black; }
 
-/* line 19, /Users/lucas/dev/polymer-math-editor/resources/elements/content-home/content-home.scss */
+/* line 29, /Users/lucas/dev/polymer-math-editor/resources/elements/content-home/content-home.scss */
 f-ormula {
   text-align: center;
   padding: 20px; }
 
 
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3Njc3MvbWl4aW5zL19yZXNldC1zbWFsbC5zY3NzIiwiX2Zvcm11bGEtYW5pbWF0aW9uLnNjc3MiLCIuLi8uLi9zY3NzL21peGlucy9fcG9zaXRpb24uc2NzcyIsImNvbnRlbnQtaG9tZS5zY3NzIiwiLi4vLi4vc2Nzcy9fZ2xvYmFscy5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxlQUFlLGVBQWUsYUFBYSxZQUFZLGNBQWMsa0JBQWtCO0VBT25GLFNBQVM7RUFDVCxRQUFRO0VBQ1IsU0FBUztFQUNULFVBQVU7OztBQUdkO0VBQ0ksWUFBWTtFQUNaLFNBQVM7OztBQUdiLEtBQUssTUFBTSxJQUFJLElBQUksSUFBSSxLQUFLLE1BQU0sT0FBTyxTQUFTLFFBQVEsU0FBUyxRQUFRLFFBQVEsUUFBUSxNQUFNLEtBQUs7RUFNbEcsWUFBWTtFQUNaLFFBQVE7RUFDUixXQUFXO0VBQ1gsUUFBUTtFQUNSLFNBQVM7RUFDVCxnQkFBZ0I7OztBQUdwQixDQUFDO0VBQ0csT0FBTzs7OztBQUlYLENBQUM7RUFDRyxPQUFPOzs7O0FBSVgsQ0FBQztFQUNHLE9BQU87Ozs7QUFJWCxDQUFDO0VBQ0csT0FBTzs7O0FDOUNYO0VBQ0ksWUFBWTtFQUNaLFVBQVU7O0VBQWQsbUJBQW1CO0lBR1gsU0FBUztJQUNULFdBQVc7SUFDWCxZQUFZO0lBQ1osYUFBYTtJQUNiLGlCQUFpQjtJQ0dyQixVREZzQjtJQ1FsQixLQVhFO0lBa0JGLE9BakJJO0lBK0JKLE1BN0JHOztFRENYLG1CQUFtQjtJQUVYLGlCQUFpQjs7RUFDekIsbUJBQW1CO0lBRVgsaUJBQWlCOztFQUN6QixtQkFBbUI7SUFFWCxpQkFBaUI7O21CQU9OOztFQUFuQjtJQUVRLFNBQVM7OztFQUNqQjtJQUVRLFNBQVM7OztFQUNqQjtJQUVRLFNBQVM7OztFQUNqQjtJQUVRLFNBQVM7OztBRW5DakI7RUFDSSxTQUFTO0VBQ1QsYUNMUTtFRE1SLE9BQU87OztBQUdYLGFBQWE7RUFDUixRQUFROzs7QUFHYixHQUFHO0VBQ0MsYUFBYTs7O0FBR2pCO0VBQ0ksWUFBWTtFQUNaLFNBQVMiLCJmaWxlIjoiY29udGVudC1ob21lLmNzcyJ9 */
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3Njc3MvbWl4aW5zL19yZXNldC1zbWFsbC5zY3NzIiwiX2Zvcm11bGEtYW5pbWF0aW9uLnNjc3MiLCIuLi8uLi9zY3NzL21peGlucy9fcG9zaXRpb24uc2NzcyIsImNvbnRlbnQtaG9tZS5zY3NzIiwiLi4vLi4vc2Nzcy9fZ2xvYmFscy5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxlQUFlLGVBQWUsYUFBYSxZQUFZLGNBQWMsa0JBQWtCO0VBT25GLFNBQVM7RUFDVCxRQUFRO0VBQ1IsU0FBUztFQUNULFVBQVU7OztBQUdkO0VBQ0ksWUFBWTtFQUNaLFNBQVM7OztBQUdiLEtBQUssTUFBTSxJQUFJLElBQUksSUFBSSxLQUFLLE1BQU0sT0FBTyxTQUFTLFFBQVEsU0FBUyxRQUFRLFFBQVEsUUFBUSxNQUFNLEtBQUs7RUFNbEcsWUFBWTtFQUNaLFFBQVE7RUFDUixXQUFXO0VBQ1gsUUFBUTtFQUNSLFNBQVM7RUFDVCxnQkFBZ0I7OztBQUdwQixDQUFDO0VBQ0csT0FBTzs7OztBQUlYLENBQUM7RUFDRyxPQUFPOzs7O0FBSVgsQ0FBQztFQUNHLE9BQU87Ozs7QUFJWCxDQUFDO0VBQ0csT0FBTzs7O0FDOUNYO0VBQ0ksWUFBWTtFQUNaLFVBQVU7O0VBQWQsbUJBQW1CO0lBR1gsU0FBUztJQUNULFdBQVc7SUFDWCxZQUFZO0lBQ1osYUFBYTtJQUNiLGlCQUFpQjtJQ0dyQixVREZzQjtJQ1FsQixLQVhFO0lBa0JGLE9BakJJO0lBK0JKLE1BN0JHOztFRENYLG1CQUFtQjtJQUVYLGlCQUFpQjs7RUFDekIsbUJBQW1CO0lBRVgsaUJBQWlCOztFQUN6QixtQkFBbUI7SUFFWCxpQkFBaUI7O21CQUlOOztFQUFuQjtJQUVRLFNBQVM7OztFQUNqQjtJQUVRLFNBQVM7OztFQUNqQjtJQUVRLFNBQVM7OztFQUNqQjtJQUVRLFNBQVM7OztBRWhDakI7RUFDSSxTQUFTO0VBQ1QsYUNMUTtFRE1SLE9BQU87OztBQUdYO0VBQ0ksa0JBQWtCO0VBQ2xCLG1CQUFtQjtFQUNuQixxQkFBcUI7RUFDckIsaUJBQWlCO0VBQ2pCLGFBQWE7RUFDYixlQUFlO0VERmYsVUNHa0I7RURHZCxLQVhFO0VBa0JGLE9BakJJOzs7QUNVWixhQUFhO0VBQ1IsUUFBUTs7O0FBR2IsR0FBRztFQUNDLGFBQWE7OztBQUdqQjtFQUNJLFlBQVk7RUFDWixTQUFTIiwiZmlsZSI6ImNvbnRlbnQtaG9tZS5jc3MifQ== */
 /*# sourceMappingURL=content-home.css.map */
