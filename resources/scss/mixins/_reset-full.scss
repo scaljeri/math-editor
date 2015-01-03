@@ -42,3 +42,22 @@ input[type="button"]::focus-inner {
 }
 input[type="search"] { appearance: textfield; }
 input[type="submit"] { appearance: none; }
+
+a:link {
+    color: #fff;
+}
+
+/* visited link */
+a:visited {
+    color: #fff;
+}
+
+/* mouse over link */
+a:hover {
+    color: #fff;
+}
+
+/* selected link */
+a:active {
+    color: #fff;
+}

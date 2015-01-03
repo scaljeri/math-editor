@@ -25,3 +25,9 @@ html, body, main {
     height: 100%;
     overflow: hidden;
 }
+
+.truncate { // the element need a width too!
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -47,11 +47,9 @@
             swiper;
 
         Polymer('demo-app', {
-            selected: 'input',
+            selected: 'home',
             ready: function () {
-                //setTimeout(function () {
-                    this.$['top-header'].classList.add('visible');
-                //}.bind(this), 0);
+                this.$['top-header'].classList.add('visible');
             },
             domReady: function () {
                 //http://www.idangero.us/sliders/swiper/api.php

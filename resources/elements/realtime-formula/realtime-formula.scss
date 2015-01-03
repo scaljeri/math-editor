@@ -31,15 +31,14 @@ f-ormula {
 
 .stats span {
     margin-right: 20px;
-
-    &.error {
-         display: inline-block;
-    }
 }
 
-.truncate {
-  width: 90%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.output {
+     span {
+     }
+
+     f-ormula {
+         padding-top: 20px;
+
+     }
 }

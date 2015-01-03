@@ -1,0 +1,42 @@
+@import '../../scss/mixins/utils';
+
+.formula-container {
+    margin-top: 30px;
+    position: relative;
+
+    .formula-group {
+        opacity: 0;
+        animation: carousel 12s infinite;
+        transition: opacity 1s ease-in-out;
+        align-items: center;
+        justify-content: center;
+        @include position(absolute, 0px 0px 0 0px);
+    }
+    .group1 {
+        animation-delay: 0s;
+    }
+    .group2 {
+        animation-delay: 4s;
+    }
+    .group3 {
+        animation-delay: 8s;
+    }
+
+    f-ormula {
+    }
+}
+
+@-webkit-keyframes carousel {
+    0% {
+        opacity: 0;
+    }
+    33% {
+        opacity: 1;
+    }
+    34% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
