@@ -1,21 +1,19 @@
-@import '../../scss/globals';
-@import '../../scss/mixins/reset-small';
-@import '../../scss/mixins/utils';
-@import 'swiper';
+@import '../../scss/mixins';
 
-$headerHeight: 100px;
-$headerOffset:10px;
-$width: 768px;
-
-* {
+$offset:10px;
+ * {
     box-sizing: border-box;
 }
+glitch-effect,
+matrix-canvas,
+header-item {
+    display: block;
+    margin: 0;
+}
 main {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    padding: $headerOffset;
+    padding: $offset;
     overflow: hidden;
+    height: 100%;
 }
 matrix-canvas {
     overflow: hidden;
@@ -36,74 +34,32 @@ matrix-canvas {
     border: 1px solid rgba(0, 0, 0, 0.5);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 10px rgba(255, 255, 255, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.25), inset 0 -15px 30px rgba(0, 0, 0, 0.3);
 }
-
-.bg-matrix-blurred {
-    position: absolute;
-    left: calc(#{$width}/2 - 50vw);
-    right: 0;
-    bottom: 0;
-    filter: blur(3px);
-    @include size(100vw, 100vh);
-}
-
 #top-header {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: $width;
     opacity: 0;
     overflow: hidden;
     position: relative;
     transition: opacity 1s ease-in-out;
     z-index: 1;
-    @include size(100%, $headerHeight);
-
+    @include size(100%, 200px);
+    
     &.visible {
         opacity: 1;
         transition-delay: 2s;
+        
         .header-content {
             opacity: 1;
             transition-delay: 2.5s;
         }
     }
-
-    .bg-matrix-blurred {
-        top: -$headerOffset;
-    }
-
-    // use inline-flex: http://jsfiddle.net/vUSmV/24/
-    .header-content {
-        height: 100%;
+    
+    .header-content { 
         position: reltaive;
         opacity: 0;
         transition: opacity 1s ease-in-out;
         z-index: 2;
-
-        #header-items {
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            height: 100%;
-            margin-top: 10px;
-
-            header-item {
-                margin-right: 20px;
-                @include size(70px, 100%);
-
-                &:last-child {
-                    margin-right: 0;
-                }
-            }
-        }
     }
     glitch-effect {
-        padding-top: 20px;
-        padding-left: 20px;
-        width: 170px;
-
-        &:first-of-type {
-            padding-left: 0;
-            padding-right: 20px;
-        }
+        padding: 20px 0 0 20px;
     }
     matrix-canvas {
         overflow: visible;
@@ -113,28 +69,11 @@ matrix-canvas {
         color: #fff;
     }
 }
-
-#content {
-    flex: 1;
-    z-index: 2;
-    //width: $width;
-    margin: 20px auto 20px auto;
-    overflow: hidden;
-    position: relative;
-    @include size($width, 100%);
-
-    .bg-matrix-blurred {
-        top: -20px - $headerHeight - 2*$headerOffset;
-    }
-}
-
-.demo-content {
-    padding: 20px 50px 0;
-    height: 100%;
-    position: relative;
-    z-index: 100;
-}
-
-.swiper-slide {
-    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0.2) 15%, rgba(255,255,255,.2) 85%, rgba(255,255,255,1) 100%);
+#bg-matrix-blurred {
+    position: absolute;
+    top: -$offset;
+    left: -$offset;
+    right: 0;
+    bottom: 0;
+    filter: blur(3px);
 }

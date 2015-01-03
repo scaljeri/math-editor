@@ -1,0 +1,40 @@
+/* line 3, /Users/lucas/dev/polymer-math-editor/resources/elements/glitch-effect/glitch-effect.scss */
+#parent {
+  position: relative; }
+
+/* line 6, /Users/lucas/dev/polymer-math-editor/resources/elements/glitch-effect/glitch-effect.scss */
+.content, .dummy-content {
+  color: #fff;
+  font-size: 18px;
+  font-family: Underwood;
+  display: block; }
+
+/* line 13, /Users/lucas/dev/polymer-math-editor/resources/elements/glitch-effect/glitch-effect.scss */
+.ghost-content {
+  font-size: 28px;
+  visibility: hidden; }
+
+/* line 18, /Users/lucas/dev/polymer-math-editor/resources/elements/glitch-effect/glitch-effect.scss */
+.partial {
+  display: block;
+  height: 2px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0; }
+
+/* line 26, /Users/lucas/dev/polymer-math-editor/resources/elements/glitch-effect/glitch-effect.scss */
+.partial-content {
+  height: 2px;
+  display: block;
+  left: 0;
+  right: 0;
+  position: absolute;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
+
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImdsaXRjaC1lZmZlY3Quc2NzcyIsIi4uLy4uL3Njc3MvX2dsb2JhbHMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBRUE7RUFDSSxVQUFVOzs7QUFFZCxVQUFVO0VBQ04sT0FBTztFQUNQLFdBQVc7RUFDWCxhQ1JVO0VEU1YsU0FBUzs7O0FBR2I7RUFDSSxXQUFXO0VBQ1gsWUFBWTs7O0FBR2hCO0VBQ0ksU0FBUztFQUNULFFBQVE7RUFDUixVQUFVO0VBQ1YsVUFBVTtFQUNWLEtBQUs7RUFDTCxNQUFNOzs7QUFFVjtFQUNJLFFBQVE7RUFDUixTQUFTO0VBQ1QsTUFBTTtFQUNOLE9BQU87RUFDUCxVQUFVO0VBQ1YsYUFBYSIsImZpbGUiOiJnbGl0Y2gtZWZmZWN0LmNzcyJ9 */
+/*# sourceMappingURL=glitch-effect.css.map */

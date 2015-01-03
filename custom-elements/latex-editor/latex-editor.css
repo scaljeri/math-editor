@@ -1,0 +1,34 @@
+/* line 8, /Users/lucas/dev/polymer-math-editor/resources/scss/mixins/reset-small */
+glitch-effect, matrix-canvas, header-item, input-demo, content-home, realtime-formula, latex-editor, formula-editor {
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: relative; }
+
+/* line 15, /Users/lucas/dev/polymer-math-editor/resources/scss/mixins/reset-small */
+* {
+  box-sizing: border-box;
+  outline: 0; }
+
+/* line 24, /Users/lucas/dev/polymer-math-editor/resources/scss/mixins/reset-small */
+div, span, h1, h2, h3, img, form, label, article, canvas, details, footer, header, hgroup, menu, nav, section {
+  background: transparent;
+  border: 0;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline; }
+
+/* line 3, /Users/lucas/dev/polymer-math-editor/resources/elements/latex-editor/latex-editor.scss */
+:host {
+  padding: 0 50px;
+  font-family: Underwood;
+  color: #fff; }
+
+/* line 9, /Users/lucas/dev/polymer-math-editor/resources/elements/latex-editor/latex-editor.scss */
+glitch-effect.header {
+  height: 40px; }
+
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3Njc3MvbWl4aW5zL19yZXNldC1zbWFsbC5zY3NzIiwibGF0ZXgtZWRpdG9yLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGVBQWUsZUFBZSxhQUFhLFlBQVksY0FBYyxrQkFBa0IsY0FBYztFQVFqRyxTQUFTO0VBQ1QsUUFBUTtFQUNSLFNBQVM7RUFDVCxVQUFVOzs7QUFHZDtFQUNJLFlBQVk7RUFDWixTQUFTOzs7QUFFYixLQUFLLE1BQU0sSUFBSSxJQUFJLElBQUksS0FBSyxNQUFNLE9BQU8sU0FBUyxRQUFRLFNBQVMsUUFBUSxRQUFRLFFBQVEsTUFBTSxLQUFLO0VBTWxHLFlBQVk7RUFDWixRQUFRO0VBQ1IsV0FBVztFQUNYLFFBQVE7RUFDUixTQUFTO0VBQ1QsZ0JBQWdCOzs7QUMzQnBCO0VBQ0ksU0FBUztFQUNULGFBQWE7RUFDYixPQUFPOzs7QUFHWCxhQUFhO0VBQ1IsUUFBUSIsImZpbGUiOiJsYXRleC1lZGl0b3IuY3NzIn0= */
+/*# sourceMappingURL=latex-editor.css.map */
