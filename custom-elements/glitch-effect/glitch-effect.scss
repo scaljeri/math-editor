@@ -1,12 +1,20 @@
+@import '../../scss/globals';
+
 #parent {
     position: relative;
 }
-.content {
+.content, .dummy-content {
     color: #fff;
     font-size: 18px;
-    font-family: Vitamin, Arail;
+    font-family: $font-header;
     display: block;
 }
+
+.ghost-content {
+    font-size: 28px;
+    visibility: hidden;
+}
+
 .partial {
     display: block;
     height: 2px;

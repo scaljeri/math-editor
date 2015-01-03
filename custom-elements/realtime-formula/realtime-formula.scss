@@ -1,0 +1,44 @@
+@import '../../scss/globals';
+@import '../../scss/mixins/reset-small';
+@import '../../scss/mixins/utils';
+
+:host {
+    padding: 0 50px;
+    font-family: Underwood;
+    color: #fff;
+    z-index: 3;
+}
+
+glitch-effect.header {
+     height: 40px;
+}
+
+#formulator {
+    background-color: rgba(255,255,255,.8);
+    box-shadow: inset 4px 5px 7px -6px rgba(50, 50, 50, 0.75);
+    //font-family: $font-text;
+    font-size: 20px;
+    margin: 20px 0;
+    padding: 10px;
+    position: relative;
+    z-index: 100;
+    @include size(100%, 200px);
+}
+
+f-ormula {
+    display: inline;
+}
+
+.stats span {
+    margin-right: 20px;
+}
+
+.output {
+     span {
+     }
+
+     f-ormula {
+         padding-top: 20px;
+
+     }
+}

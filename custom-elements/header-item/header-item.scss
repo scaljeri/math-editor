@@ -1,0 +1,83 @@
+@import '../../scss/mixins/reset-small';
+@import '../../scss/mixins/utils';
+$bg:rgba(248, 248, 255, .3);
+$side:40px;
+$width:70px;
+$borderWidth:20px; //sqrt(pow($side, 2px) - pow($width/2px, 2));
+$selectedColor: #0F0;
+
+* {
+    transition: all .5s; // should target specific properties
+
+    &::before, &::after {
+        transition: opacity .5s;
+    }
+}
+
+#logo,
+img {
+    @include size(100%, 100%);
+}
+
+// http://jtauber.github.io/articles/css-hexagon.html
+.hex {
+    display: block;
+    margin-top: $borderWidth;
+    background-color: $bg;
+    position: relative;
+    @include size($width, $side);
+    &::before {
+        content: " ";
+        border-bottom: $borderWidth solid $bg;
+        border-left: $width/2 solid transparent;
+        border-right: $width/2 solid transparent;
+        position: absolute;
+        top: -$borderWidth;
+        @include size(0, 0);
+    }
+    &::after {
+        content: "";
+        width: 0;
+        position: absolute;
+        bottom: -$borderWidth;
+        border-top: $borderWidth solid $bg;
+        border-left: $width/2 solid transparent;
+        border-right: $width/2 solid transparent;
+    }
+    #background-circle {
+        background-color: $bg;
+        border-radius: 50px;
+        margin-top: 5px;
+        opacity: 0;
+        display: block;
+        @include position(absolute, -20px 0px 0 0);
+        @include size($width, $width);
+    }
+    &:not(.selected):hover {
+        background-color: transparent;
+        #background-circle {
+            opacity: 1;
+        }
+        &::before,
+        &::after {
+            opacity: 0;
+        }
+        img {
+            transform: scale(1.2, 1.2);
+            transition: all .1s;
+        }
+    }
+    &:active #logo {
+        transform: translate(0, 2px);
+    }
+}
+
+.hex.selected {
+    background-color: rgba($selectedColor, .5);
+    &::before {
+        border-bottom-color: rgba($selectedColor, .5);
+    }
+    &::after {
+         border-top-color: rgba($selectedColor, .5);
+    }
+}
