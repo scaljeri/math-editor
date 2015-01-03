@@ -1,0 +1,72 @@
+<polymer-element name="demo-app">
+    <template>
+        <link rel="stylesheet" href="../../bower_components/swiper/dist/idangerous.swiper.css">
+        <link rel="stylesheet" href="demo-app.css">
+
+        <matrix-canvas id="bg-matrix"></matrix-canvas>
+        <main>
+            <header id="top-header" class="glass">
+                <matrix-canvas class="bg-matrix-blurred" clone></matrix-canvas>
+                <section horizontal center-justified layout class="header-content">
+                    <glitch-effect text="Polymer"></glitch-effect>
+
+                    <div id="header-items">
+                        <header-item logo="/images/home-icon.png" itemName="home" selected="{{selected}}"></header-item>
+                        <header-item logo="/images/kformula_kfo.png" itemName="input" selected="{{selected}}"></header-item>
+                        <header-item logo="/images/input-icon.png" itemName="edit" selected="{{selected}}"></header-item>
+                    </div>
+
+                    <glitch-effect text="Formula"></glitch-effect>
+                </section>
+            </header>
+
+            <section id="content" class="glass">
+                <matrix-canvas class="bg-matrix-blurred" clone></matrix-canvas>
+                <div id="swiper" class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <content-home class="demo-content"></content-home>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <realtime-formula class="demo-content"></realtime-formula>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <formula-editor class="demo-content"></formula-editor>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    </template>
+
+    <script>
+        var items = ['home', 'input', 'edit'],
+            swiper;
+
+        Polymer('demo-app', {
+            selected: 'home',
+            ready: function () {
+                this.$['top-header'].classList.add('visible');
+            },
+            domReady: function () {
+                //http://www.idangero.us/sliders/swiper/api.php
+                swiper = $(this.$.swiper).swiper({
+                    mode: 'horizontal',
+                    loop: false,
+                    cssWidthAndHeight: true,
+                    simulateTouch: false,
+                    initialSlide: items.indexOf(this.selected),
+                    onSlideChangeEnd: function (swiper, dir) {
+                        this.selected = items[swiper.activeIndex];
+                    }.bind(this)
+                });
+            },
+            selectedChanged: function (oldV, newV) {
+                swiper.swipeTo(items.indexOf(newV));
+            }
+        });
+    </script>
+</polymer-element>

@@ -1,0 +1,25 @@
+/* line 1, /Users/lucas/dev/polymer-math-editor/resources/elements/f-ormula/f-ormula.scss */
+:host {
+  display: block; }
+
+/* To ensure your styling works under the Shadow DOM polyfill, see
+   www.polymer-project.org/docs/polymer/styling.html#directives */
+/* line 7, /Users/lucas/dev/polymer-math-editor/resources/elements/f-ormula/f-ormula.scss */
+polyfill-next-selector {
+  content: ':host > h2'; }
+
+/* line 8, /Users/lucas/dev/polymer-math-editor/resources/elements/f-ormula/f-ormula.scss */
+::content h2 {
+  color: blue; }
+
+/* line 12, /Users/lucas/dev/polymer-math-editor/resources/elements/f-ormula/f-ormula.scss */
+div {
+  display: inline-block; }
+
+/* line 16, /Users/lucas/dev/polymer-math-editor/resources/elements/f-ormula/f-ormula.scss */
+.invisible {
+  visibility: hidden; }
+
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImYtb3JtdWxhLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBO0VBQ0UsU0FBUzs7Ozs7QUFLWDtFQUF5QixTQUFTOzs7QUFDbEMsVUFBVTtFQUNSLE9BQU87OztBQUdUO0VBQ0ksU0FBUzs7O0FBR2I7RUFDSSxZQUFZIiwiZmlsZSI6ImYtb3JtdWxhLmNzcyJ9 */
+/*# sourceMappingURL=f-ormula.css.map */

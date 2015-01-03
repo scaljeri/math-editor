@@ -1,0 +1,53 @@
+/* line 7, /Users/lucas/dev/polymer-math-editor/resources/scss/mixins/reset-small */
+glitch-effect, matrix-canvas, header-item, input-demo, content-home, realtime-formula, formula-editor {
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: relative; }
+
+/* line 14, /Users/lucas/dev/polymer-math-editor/resources/scss/mixins/reset-small */
+* {
+  box-sizing: border-box;
+  outline: 0; }
+
+/* line 24, /Users/lucas/dev/polymer-math-editor/resources/scss/mixins/reset-small */
+div, span, h1, h2, h3, img, form, label, article, canvas, details, footer, header, hgroup, menu, nav, section {
+  background: transparent;
+  border: 0;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline; }
+
+/* line 33, /Users/lucas/dev/polymer-math-editor/resources/scss/mixins/reset-small */
+a:link {
+  color: #fff; }
+
+/* visited link */
+/* line 38, /Users/lucas/dev/polymer-math-editor/resources/scss/mixins/reset-small */
+a:visited {
+  color: #fff; }
+
+/* mouse over link */
+/* line 43, /Users/lucas/dev/polymer-math-editor/resources/scss/mixins/reset-small */
+a:hover {
+  color: #fff; }
+
+/* selected link */
+/* line 48, /Users/lucas/dev/polymer-math-editor/resources/scss/mixins/reset-small */
+a:active {
+  color: #fff; }
+
+/* line 3, /Users/lucas/dev/polymer-math-editor/resources/elements/formula-editor/formula-editor.scss */
+:host {
+  padding: 0 50px;
+  font-family: Underwood;
+  color: #fff; }
+
+/* line 9, /Users/lucas/dev/polymer-math-editor/resources/elements/formula-editor/formula-editor.scss */
+glitch-effect.header {
+  height: 40px; }
+
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3Njc3MvbWl4aW5zL19yZXNldC1zbWFsbC5zY3NzIiwiZm9ybXVsYS1lZGl0b3Iuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsZUFBZSxlQUFlLGFBQWEsWUFBWSxjQUFjLGtCQUFrQjtFQU9uRixTQUFTO0VBQ1QsUUFBUTtFQUNSLFNBQVM7RUFDVCxVQUFVOzs7QUFHZDtFQUNJLFlBQVk7RUFDWixTQUFTOzs7QUFHYixLQUFLLE1BQU0sSUFBSSxJQUFJLElBQUksS0FBSyxNQUFNLE9BQU8sU0FBUyxRQUFRLFNBQVMsUUFBUSxRQUFRLFFBQVEsTUFBTSxLQUFLO0VBTWxHLFlBQVk7RUFDWixRQUFRO0VBQ1IsV0FBVztFQUNYLFFBQVE7RUFDUixTQUFTO0VBQ1QsZ0JBQWdCOzs7QUFHcEIsQ0FBQztFQUNHLE9BQU87Ozs7QUFJWCxDQUFDO0VBQ0csT0FBTzs7OztBQUlYLENBQUM7RUFDRyxPQUFPOzs7O0FBSVgsQ0FBQztFQUNHLE9BQU87OztBQzlDWDtFQUNJLFNBQVM7RUFDVCxhQUFhO0VBQ2IsT0FBTzs7O0FBR1gsYUFBYTtFQUNSLFFBQVEiLCJmaWxlIjoiZm9ybXVsYS1lZGl0b3IuY3NzIn0= */
+/*# sourceMappingURL=formula-editor.css.map */

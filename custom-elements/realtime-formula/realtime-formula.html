@@ -1,0 +1,35 @@
+<link rel="import" href="/custom-elements/glitch-effect/glitch-effect.html">
+
+<polymer-element name="realtime-formula" attributes="">
+    <template>
+        <link rel="stylesheet" href="realtime-formula.css">
+        <article vertical layout>
+            <glitch-effect class="header" text="formula rendering"></glitch-effect>
+
+            <textarea id="formulator" placeholder="Enter your Latex, MathML or AsciiMathML here" on-click="{{focus}}" on-keyup="{{keypressHandler}}"></textarea>
+            <p class="stats">
+                <span>Input format: {{format}}</span>
+                <span>Time spend: {{duration}}</span>
+                <span>Used library: {{usedLibrary}}</span>
+            </p>
+
+            <p vertical layout class="output">
+                <span>Output:</span>
+                <f-ormula self-center data="{{formula}}" format="{{format}}" duration="{{duration}}" usedLibrary="{{usedLibrary}}" error="{{error}}"></f-ormula>
+            </p>
+        </article>
+    </template>
+
+    <script>
+        Polymer('realtime-formula', {
+            ready: function () {},
+            focus: function () {
+                this.$.formulator.focus(); // solve weird focus issue
+            },
+            keypressHandler: function () {
+                console.log(this.$.formulator.value);
+                 this.formula = this.$.formulator.value;
+            }
+        });
+    </script>
+</polymer-element>

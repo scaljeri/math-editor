@@ -1,0 +1,29 @@
+.swiper-container {
+    /* Specify Swiper's Size: */
+    /*width:200px;
+        height: 100px;*/
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+.swiper-slide {
+    /* Specify Slides's Size: */
+    display: inline-block;
+    width: 726px;
+    height: 100%;
+    margin: 0 20px 0 20px;
+}
+.swiper-slide-active {
+    /* Specific active slide styling: */
+}
+.swiper-slide-visible {
+    /* Specific visible slide styling: */
+}
+.swiper-wrapper {
+    height: 100%;
+    width: 766px * 3;
+    min-height: 530px;
+}

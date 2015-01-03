@@ -1,0 +1,66 @@
+glitch-effect, matrix-canvas, header-item, input-demo, content-home, realtime-formula, latex-editor, formula-editor {
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: relative; }
+
+* {
+  box-sizing: border-box;
+  outline: 0; }
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+input[type="submit"]::focus-inner, input[type="button"]::focus-inner {
+  border: 0px; }
+
+input[type="search"] {
+  appearance: textfield; }
+
+input[type="submit"] {
+  appearance: none; }
+
+a:link {
+  color: #fff; }
+
+/* visited link */
+a:visited {
+  color: #fff; }
+
+/* mouse over link */
+a:hover {
+  color: #fff; }
+
+/* selected link */
+a:active {
+  color: #fff; }
+
+@font-face {
+  font-family: Vitamin;
+  src: url('/css/fonts/VITAMIN.TTF'); }
+
+@font-face {
+  font-family: Underwood;
+  src: url('/css/fonts/MyUnderwood.ttf'); }
+
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+html, body, main {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }

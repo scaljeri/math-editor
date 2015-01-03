@@ -1,0 +1,229 @@
+<!--
+    @license
+    Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+    Code distributed by Google as part of the polymer project is also
+    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+Element providing solution to no problem in particular.
+
+##### Example
+
+    <math-editor></math-editor>
+
+@element math-editor
+@blurb Element providing solution to no problem in particular.
+@status alpha
+@homepage http://polymerlabs.github.io/math-editor
+-->
+<polymer-element name="math-editor" attributes="formula format">
+
+    <template>
+        <link rel="stylesheet" href="math-editor.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
+        <core-ajax id="xsl" url="/math-editor/mmltex.xsl" params='{"alt":"xml"}' handleAs="xml" on-core-response="{{handleXSL}}"></core-ajax>
+
+        <article>
+            <span>Formula: </span><span id="formula"></span>
+        </article>
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mfrac><mrow><mi>x</mi></mrow><mrow><mi>y</mi></mrow></mfrac></mrow></math>
+    </template>
+
+    <script>
+        var xsl, callback = [];
+
+        (function () {
+            var supported = {
+                Latex: {
+                    render: function (f) {
+                        try {
+                            katex.render(f, this.$.formula);
+                        } catch (e) {
+                            this.$.formula.innerHTML = 'Invalid';
+                            this.error = e;
+                            console.warn(e.message);
+                            console.warn('Formua: ' + f);
+                        }
+                    }
+                },
+                AsciiMath: {
+                    render: function (f) {
+                        var latex = AMTparseAMtoTeX(f);
+                        supported.Latex.render.call(this, latex);
+                    }
+                },
+                MathML: {
+                    render: function (f) {
+                        var xml = (new window.DOMParser()).parseFromString(f, "text/xml"),
+                            xsltProcessor = new XSLTProcessor();
+
+                        debugger;
+                        this.handleXSL = function (e, response) {
+                            xsltProcessor.importStylesheet(response.response);
+                            resultDocument = xsltProcessor.transformToFragment(xml, document);
+                            //this.$.xslt.appendChild(katex.render(resultDocument.textContent));
+                            debugger;
+                            katex.render(resultDocument.textContent.replace(/(^\$|\$$)/g, ''), this.$.formula);
+                            //document.getElementById("example").appendChild(resultDocument);
+                        };
+
+                        this.$.xsl.go();
+
+                    }
+                },
+                'Plain Text': {
+                    render: function (f) {
+                        this.$.formula.innerHTML = f;
+                    }
+                }
+            }
+
+            function mathML2Tex(f) {
+                /*
+                callback.push(transfromMathML2Tex.bind(
+
+                }.bind(this));
+
+                this.$.xsl.go();
+                */
+            }
+
+            function detectFormat(formula) {
+                var retVal = 'Plain Text';
+
+                if (formula.match(/^<math/) !== null) {
+                    return 'MathML';
+                } else if (formula.match(/\\[^\d]/)) {
+                    retVal = 'Latex';
+                } else {//if (formula.match(/\w\w/|\[\[/)) {
+                    retVal = 'AsciiMath';
+                }
+
+                return retVal;
+            }
+
+            Polymer('math-editor', {
+                created: function () {},
+                ready: function () {
+                },
+                formulaChanged: function (oldV, newV) {
+                    if (newV) {
+                        this.format = detectFormat(newV);
+                        supported[this.format].render.call(this, newV);
+
+                        /*
+                        console.log(this.format);
+                        //this.$.formula.innerHTML = this.formula;
+                        if (this.format === 'latex') {
+                            katex.render(newV, this.$.formula);
+                        }
+                        */
+                    }
+
+                    //console.log('formula=' + AMTparseAMtoTeX(this.formula));
+                    //$(this.$.formula).mathquill('latex', '\frac{d}{dx}\sqrt{x}').mathquill('redraw');//AMTparseAMtoTeX(this.formula));
+                    //this.$.formula.innerHTML = '\frac{d}{dx}\sqrt{x} = \frac{d}{dx}x^{\frac{1}{2}} = \frac{1}{2}x^{-\frac{1}{2}} = \frac{1}{2\sqrt{x}}';
+                    //$(this.$.formula).mathquill();
+                    //$(this.$.formula).mathquill('latex', 'a_n x^n');
+
+                    /*
+                    console.log('Formula changed: ' + oldV + ' into ' + newV + ' --> ' + AMTparseAMtoTeX(newV));
+                    katex.render(AMTparseAMtoTeX(newV), this.$.formula);
+*/
+                    //katex.render('\\displaystyle \\frac{1}{\\Bigl(\\sqrt{\\phi \\sqrt{5}}-\\phi\\Bigr) e^{\\frac25 \\pi}} = 1+\\frac{e^{-2\\pi}} {1+\\frac{e^{-4\\pi}} {1+\\frac{e^{-6\\pi}} {1+\\frac{e^{-8\\pi}} {1+\\cdots} } } }', this.$.formula);
+                    /*
+                    var input = AMTparseAMtoTeX('f(x)={(text(-)2/x, text(voor),x &lt; text(-)1),(text(-)2x, text(voor), text(-)1 ≤x≤1) , ( text(-)2/x , text(voor) , x&gt;1):}');
+
+*/
+                    //input = input.replace(/\\\\/g, '\\');
+                    //katex.render(this.formula, this.$.formula);
+                },
+                attached: function () {},
+                domReady: function () {},
+                detached: function () {},
+                attributeChanged: function (attrName, oldVal, newVal) {
+                    //var newVal = this.getAttribute(attrName);
+                    //console.log(attrName, 'old: ' + oldVal, 'new:', newVal);
+                },
+                _handleXSLT: function (e, response) {
+                    /*
+                    var xmlStr = '<math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mfrac><mrow><mi>x</mi></mrow><mrow><mi>y</mi></mrow></mfrac></mrow></math>';
+                    var xml = (new window.DOMParser()).parseFromString(xmlStr, "text/xml");
+
+                    var xsltProcessor = new XSLTProcessor();
+                    xsltProcessor.importStylesheet(response.response);
+                    resultDocument = xsltProcessor.transformToFragment(xml, document);
+                    //this.$.xslt.appendChild(katex.render(resultDocument.textContent));
+                    katex.render(resultDocument.textContent.replace(/(^\$|\$$)/g, ''), this.$.xslt);
+                    //document.getElementById("example").appendChild(resultDocument);
+                    */
+                }
+            });
+        })();
+
+        /*
+    Polymer({
+      /**
+       * The `author` attribute sets an initial author
+       *
+       * @attribute author
+       * @type string
+       * @default 'Dimitri Glazkov'
+       * /
+      author: 'Dimitri Glazkov',
+
+      /**
+       * `fancy` is a property that does something fancy.
+       *
+       * @property fancy
+       * @type bool
+       * @default false
+       * /
+      fancy: false,
+
+      ready: function() {
+        // Ready is a lifecycle callback.
+        // You can do setup work in here.
+        // More info: http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
+      },
+
+      /**
+       * The `sayHello` method will return a greeting.
+       *
+       * @method sayHello
+       * @param {String} greeting Pass in a specific greeting.
+       * @return {String} Returns a string greeting.
+       * /
+      sayHello: function(greeting) {
+        var response = greeting || 'Hello World!';
+        return 'math-editor says, ' + response;
+      },
+
+      /**
+       * The `math-editor-lasers-success` event is fired whenever we
+       * call fireLasers.
+       *
+       * @event math-editor-lasers-success
+       * @param {Object} detail
+       *   @param {string} detail.sound An amazing sound.
+       */
+
+        /**
+       * The `fireLasers` method will fire the lasers. At least
+       * it will dispatch an event that claims lasers were fired :)
+       *
+       * @method fireLasers
+       * /
+      fireLasers: function() {
+        this.fire('math-editor-lasers-success', { sound: 'Pew pew pew!' });
+      }*/
+
+         //});
+    </script>
+
+</polymer-element>

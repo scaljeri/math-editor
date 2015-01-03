@@ -1,0 +1,61 @@
+<link rel="import" href="/custom-elements/f-ormula/f-ormula.html">
+
+<polymer-element name="content-home" attributes="">
+    <template>
+        <link rel="stylesheet" href="content-home.css">
+
+        <article>
+            <glitch-effect class="header" text="home"></glitch-effect>
+
+            <p>The purpose of this site is to demonstrate formula rendering in the browser. I've written a custom web-component which renders any formula defined in of the following formats:
+                <ol>
+                    <li>AsciiMathML</li>
+                    <li>Latex</li>
+                    <li>MathML</li>
+                </ol>
+            </p>
+
+            <p>
+                All formulae are rendered using the <a href="https://github.com/Khan/KaTeX" target="_blank">Katex</a> library. It is the fastest formula
+                rendering library out there, but unfortunate it can't render all types of formulae. In those cases
+                <a href="Mhttps://github.com/mathjax/MathJa">MathJax</a> is used.<br>
+                If for some reason the formula doesn't render the way you expect, checkout the console for any errors!
+            </p>
+
+            <!--<f-ormula data="\[\begin{aligned} \dot{x} & = \sigma(y-x) \\ \dot{y} & = \rho x – y – xz \\ \dot{z} & = -\beta z + xy \end{aligned} \]"></f-ormula>-->
+            <div class="formula-container">
+                <div horizontal layout class="formula-group group1">
+                    <!-- http://en.wikipedia.org/wiki/Help:Displaying_a_formula -->
+                    <f-ormula self-center data="k_{n+1} = n^2 + k_n^2 - k_{n-1}"></f-ormula>
+                    <f-ormula self-center data="\lim\limits_{x\to 0}{\frac{e^x-1}{2x}}\overset{\left[\frac{0}{0}\right]}{\underset{\mathrm{H}}{=}}\lim\limits_{x\to 0}{\frac{e^x}{2}}={\frac{1}{2}}"></f-ormula>
+                    <f-ormula self-center data="\sideset{_1^2}{_3^4}\prod_a^b"></f-ormula>
+                    <f-ormula self-center data="{}_1^2\!\Omega_3^4"></f-ormula>
+                </div>
+                <div horizontal layout class="formula-group group2">
+                    <f-ormula self-center data="f(n) = \begin{cases} n/2, & \text{if }n\text{ is even} \\ 3n+1, & \text{if }n\text{ is odd} \end{cases}"></f-ormula>
+                    <!--<f-ormula self-center data="\begin{array}{|c|c||c|} a & b & S \\ \hline 0&0&1\\ 0&1&1\\ 1&0&1\\ 1&1&0\\ \end{array}"></f-ormula>-->
+                    <f-ormula self-center data="A_{m,n} =
+ \begin{pmatrix}
+  a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
+  a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\
+  \vdots  & \vdots  & \ddots & \vdots  \\
+  a_{m,1} & a_{m,2} & \cdots & a_{m,n}
+ \end{pmatrix}"></f-ormula>
+                    <!--<f-ormula self-center data="\begin{bmatrix} 0 & \cdots & 0 \\ \vdots & \ddots & \vdots \\ 0 & \cdots & 0 \end{bmatrix}"></f-ormula>-->
+                </div>
+                <div horizontal layout class="formula-group group3">
+                    <f-ormula self-center library="MathJax" data="\{ \bigl\{ \Bigl\{ \biggl\{ \Biggl\{ x^2 \Biggr\rangle \biggr\rangle \Bigr\rangle \bigr\rangle \rangle"></f-ormula>
+                    <f-ormula self-center data="\overbrace{ 1+2+\cdots+100 }^{5050}"></f-ormula>
+                    <f-ormula self-center data="\iiint\limits_E \, dx\,dy\,dz"></f-ormula>
+                    <f-ormula self-center data="\overrightarrow{a b} \ \overleftarrow{c d} \ \widehat{d e f}"></f-ormula>
+                </div>
+            </div>
+        </article>
+    </template>
+
+    <script>
+        Polymer('content-home', {
+            ready: function () {}
+        });
+    </script>
+</polymer-element>
