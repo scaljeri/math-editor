@@ -42,11 +42,11 @@ a:active {
 
 @font-face {
   font-family: Vitamin;
-  src: url('/css/fonts/VITAMIN.TTF'); }
+  src: url('fonts/VITAMIN.TTF'); }
 
 @font-face {
   font-family: Underwood;
-  src: url('/css/fonts/MyUnderwood.ttf'); }
+  src: url('fonts/MyUnderwood.ttf'); }
 
 html {
   box-sizing: border-box; }
