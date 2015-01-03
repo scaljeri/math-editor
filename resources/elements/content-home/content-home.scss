@@ -8,6 +8,16 @@
     color: #fff;
 }
 
+ .chrome-only {
+    background-image: url(../../images/chrome-icon.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 40px 40px;
+    line-height: 40px;
+    padding-right: 50px;
+    @include position(absolute, 20px 20px 0 0);
+}
+
 glitch-effect.header {
      height: 40px;
 }
