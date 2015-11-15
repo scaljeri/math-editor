@@ -54,3 +54,7 @@ The tests are also compatible with [web-component-tester](https://github.com/Pol
 npm install -g web-component-tester
 wct
 ```
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/scaljeri/math-editor/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
